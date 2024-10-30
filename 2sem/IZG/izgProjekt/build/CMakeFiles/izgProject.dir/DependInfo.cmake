@@ -1,0 +1,97 @@
+
+# Consider dependencies only in project.
+set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
+
+# The set of languages for which implicit dependencies are needed:
+set(CMAKE_DEPENDS_LANGUAGES
+  )
+
+# The set of dependency files which are needed:
+set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/mezok/2sem/izg/projekt/examples/angry.cpp" "CMakeFiles/izgProject.dir/examples/angry.cpp.o" "gcc" "CMakeFiles/izgProject.dir/examples/angry.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/examples/anime.cpp" "CMakeFiles/izgProject.dir/examples/anime.cpp.o" "gcc" "CMakeFiles/izgProject.dir/examples/anime.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/examples/czFlagMethod.cpp" "CMakeFiles/izgProject.dir/examples/czFlagMethod.cpp.o" "gcc" "CMakeFiles/izgProject.dir/examples/czFlagMethod.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/examples/edgeDetect.cpp" "CMakeFiles/izgProject.dir/examples/edgeDetect.cpp.o" "gcc" "CMakeFiles/izgProject.dir/examples/edgeDetect.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/examples/emptyMethod.cpp" "CMakeFiles/izgProject.dir/examples/emptyMethod.cpp.o" "gcc" "CMakeFiles/izgProject.dir/examples/emptyMethod.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/examples/modelMethod.cpp" "CMakeFiles/izgProject.dir/examples/modelMethod.cpp.o" "gcc" "CMakeFiles/izgProject.dir/examples/modelMethod.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/examples/phongMethod.cpp" "CMakeFiles/izgProject.dir/examples/phongMethod.cpp.o" "gcc" "CMakeFiles/izgProject.dir/examples/phongMethod.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/examples/rotatingTriangles.cpp" "CMakeFiles/izgProject.dir/examples/rotatingTriangles.cpp.o" "gcc" "CMakeFiles/izgProject.dir/examples/rotatingTriangles.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/examples/shadowMapping.cpp" "CMakeFiles/izgProject.dir/examples/shadowMapping.cpp.o" "gcc" "CMakeFiles/izgProject.dir/examples/shadowMapping.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/examples/shadowModel.cpp" "CMakeFiles/izgProject.dir/examples/shadowModel.cpp.o" "gcc" "CMakeFiles/izgProject.dir/examples/shadowModel.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/examples/skFlagMethod.cpp" "CMakeFiles/izgProject.dir/examples/skFlagMethod.cpp.o" "gcc" "CMakeFiles/izgProject.dir/examples/skFlagMethod.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/examples/stairs.cpp" "CMakeFiles/izgProject.dir/examples/stairs.cpp.o" "gcc" "CMakeFiles/izgProject.dir/examples/stairs.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/examples/texturedQuadMethod.cpp" "CMakeFiles/izgProject.dir/examples/texturedQuadMethod.cpp.o" "gcc" "CMakeFiles/izgProject.dir/examples/texturedQuadMethod.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/examples/triangle3DMethod.cpp" "CMakeFiles/izgProject.dir/examples/triangle3DMethod.cpp.o" "gcc" "CMakeFiles/izgProject.dir/examples/triangle3DMethod.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/examples/triangleBufferMethod.cpp" "CMakeFiles/izgProject.dir/examples/triangleBufferMethod.cpp.o" "gcc" "CMakeFiles/izgProject.dir/examples/triangleBufferMethod.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/examples/triangleClip1Method.cpp" "CMakeFiles/izgProject.dir/examples/triangleClip1Method.cpp.o" "gcc" "CMakeFiles/izgProject.dir/examples/triangleClip1Method.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/examples/triangleClip2Method.cpp" "CMakeFiles/izgProject.dir/examples/triangleClip2Method.cpp.o" "gcc" "CMakeFiles/izgProject.dir/examples/triangleClip2Method.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/examples/triangleMethod.cpp" "CMakeFiles/izgProject.dir/examples/triangleMethod.cpp.o" "gcc" "CMakeFiles/izgProject.dir/examples/triangleMethod.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/examples/video.cpp" "CMakeFiles/izgProject.dir/examples/video.cpp.o" "gcc" "CMakeFiles/izgProject.dir/examples/video.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/framework/application.cpp" "CMakeFiles/izgProject.dir/framework/application.cpp.o" "gcc" "CMakeFiles/izgProject.dir/framework/application.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/framework/arguments.cpp" "CMakeFiles/izgProject.dir/framework/arguments.cpp.o" "gcc" "CMakeFiles/izgProject.dir/framework/arguments.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/framework/bunny.cpp" "CMakeFiles/izgProject.dir/framework/bunny.cpp.o" "gcc" "CMakeFiles/izgProject.dir/framework/bunny.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/framework/colorPrinting.cpp" "CMakeFiles/izgProject.dir/framework/colorPrinting.cpp.o" "gcc" "CMakeFiles/izgProject.dir/framework/colorPrinting.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/framework/main.cpp" "CMakeFiles/izgProject.dir/framework/main.cpp.o" "gcc" "CMakeFiles/izgProject.dir/framework/main.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/framework/model.cpp" "CMakeFiles/izgProject.dir/framework/model.cpp.o" "gcc" "CMakeFiles/izgProject.dir/framework/model.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/framework/programContext.cpp" "CMakeFiles/izgProject.dir/framework/programContext.cpp.o" "gcc" "CMakeFiles/izgProject.dir/framework/programContext.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/framework/systemSpecific.cpp" "CMakeFiles/izgProject.dir/framework/systemSpecific.cpp.o" "gcc" "CMakeFiles/izgProject.dir/framework/systemSpecific.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/framework/textureData.cpp" "CMakeFiles/izgProject.dir/framework/textureData.cpp.o" "gcc" "CMakeFiles/izgProject.dir/framework/textureData.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/framework/window.cpp" "CMakeFiles/izgProject.dir/framework/window.cpp.o" "gcc" "CMakeFiles/izgProject.dir/framework/window.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/libs/impl.cpp" "CMakeFiles/izgProject.dir/libs/impl.cpp.o" "gcc" "CMakeFiles/izgProject.dir/libs/impl.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/student/fwd.cpp" "CMakeFiles/izgProject.dir/student/fwd.cpp.o" "gcc" "CMakeFiles/izgProject.dir/student/fwd.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/student/gpu.cpp" "CMakeFiles/izgProject.dir/student/gpu.cpp.o" "gcc" "CMakeFiles/izgProject.dir/student/gpu.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/student/prepareModel.cpp" "CMakeFiles/izgProject.dir/student/prepareModel.cpp.o" "gcc" "CMakeFiles/izgProject.dir/student/prepareModel.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/commandBufferToStr.cpp" "CMakeFiles/izgProject.dir/tests/commandBufferToStr.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/commandBufferToStr.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/commands/bindFramebufferTests.cpp" "CMakeFiles/izgProject.dir/tests/commands/bindFramebufferTests.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/commands/bindFramebufferTests.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/commands/bindProgramTests.cpp" "CMakeFiles/izgProject.dir/tests/commands/bindProgramTests.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/commands/bindProgramTests.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/commands/bindVertexArrayTests.cpp" "CMakeFiles/izgProject.dir/tests/commands/bindVertexArrayTests.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/commands/bindVertexArrayTests.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/commands/clear.cpp" "CMakeFiles/izgProject.dir/tests/commands/clear.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/commands/clear.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/commands/commandTests.cpp" "CMakeFiles/izgProject.dir/tests/commands/commandTests.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/commands/commandTests.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/commands/drawID.cpp" "CMakeFiles/izgProject.dir/tests/commands/drawID.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/commands/drawID.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/commands/drawTests.cpp" "CMakeFiles/izgProject.dir/tests/commands/drawTests.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/commands/drawTests.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/commands/framebufferTests.cpp" "CMakeFiles/izgProject.dir/tests/commands/framebufferTests.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/commands/framebufferTests.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/commands/setDrawId.cpp" "CMakeFiles/izgProject.dir/tests/commands/setDrawId.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/commands/setDrawId.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/commands/subCommandTests.cpp" "CMakeFiles/izgProject.dir/tests/commands/subCommandTests.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/commands/subCommandTests.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/conformanceTests.cpp" "CMakeFiles/izgProject.dir/tests/conformanceTests.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/conformanceTests.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/createModel.cpp" "CMakeFiles/izgProject.dir/tests/createModel.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/createModel.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/drawModelTests.cpp" "CMakeFiles/izgProject.dir/tests/drawModelTests.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/drawModelTests.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/finalImageTest.cpp" "CMakeFiles/izgProject.dir/tests/finalImageTest.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/finalImageTest.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/fragmentShader.cpp" "CMakeFiles/izgProject.dir/tests/fragmentShader.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/fragmentShader.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/getExpectedPreparedModel.cpp" "CMakeFiles/izgProject.dir/tests/getExpectedPreparedModel.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/getExpectedPreparedModel.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/gpu/barycentrics.cpp" "CMakeFiles/izgProject.dir/tests/gpu/barycentrics.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/gpu/barycentrics.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/gpu/clippingTests.cpp" "CMakeFiles/izgProject.dir/tests/gpu/clippingTests.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/gpu/clippingTests.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/gpu/common.cpp" "CMakeFiles/izgProject.dir/tests/gpu/common.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/gpu/common.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/gpu/discardTest.cpp" "CMakeFiles/izgProject.dir/tests/gpu/discardTest.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/gpu/discardTest.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/gpu/gl_FragCoord.cpp" "CMakeFiles/izgProject.dir/tests/gpu/gl_FragCoord.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/gpu/gl_FragCoord.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/gpu/gl_VertexID.cpp" "CMakeFiles/izgProject.dir/tests/gpu/gl_VertexID.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/gpu/gl_VertexID.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/gpu/perspectiveDivision.cpp" "CMakeFiles/izgProject.dir/tests/gpu/perspectiveDivision.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/gpu/perspectiveDivision.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/gpu/pfo.cpp" "CMakeFiles/izgProject.dir/tests/gpu/pfo.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/gpu/pfo.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/gpu/rasterization.cpp" "CMakeFiles/izgProject.dir/tests/gpu/rasterization.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/gpu/rasterization.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/gpu/vertexArrayTests.cpp" "CMakeFiles/izgProject.dir/tests/gpu/vertexArrayTests.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/gpu/vertexArrayTests.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/gpu/vs_interface.cpp" "CMakeFiles/izgProject.dir/tests/gpu/vs_interface.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/gpu/vs_interface.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/gpu/writeToFBO.cpp" "CMakeFiles/izgProject.dir/tests/gpu/writeToFBO.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/gpu/writeToFBO.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/gpuMemToStr.cpp" "CMakeFiles/izgProject.dir/tests/gpuMemToStr.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/gpuMemToStr.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/isMemDifferent.cpp" "CMakeFiles/izgProject.dir/tests/isMemDifferent.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/isMemDifferent.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/memDeepCopy.cpp" "CMakeFiles/izgProject.dir/tests/memDeepCopy.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/memDeepCopy.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/modelTestUtils.cpp" "CMakeFiles/izgProject.dir/tests/modelTestUtils.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/modelTestUtils.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/performanceTest.cpp" "CMakeFiles/izgProject.dir/tests/performanceTest.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/performanceTest.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/renderMethodFrame.cpp" "CMakeFiles/izgProject.dir/tests/renderMethodFrame.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/renderMethodFrame.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/takeScreenShot.cpp" "CMakeFiles/izgProject.dir/tests/takeScreenShot.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/takeScreenShot.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/testCommon.cpp" "CMakeFiles/izgProject.dir/tests/testCommon.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/testCommon.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/traverseModelTests.cpp" "CMakeFiles/izgProject.dir/tests/traverseModelTests.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/traverseModelTests.cpp.o.d"
+  "/home/mezok/2sem/izg/projekt/tests/vertexShader.cpp" "CMakeFiles/izgProject.dir/tests/vertexShader.cpp.o" "gcc" "CMakeFiles/izgProject.dir/tests/vertexShader.cpp.o.d"
+  )
+
+# Targets to which this target links.
+set(CMAKE_TARGET_LINKED_INFO_FILES
+  "/home/mezok/2sem/izg/projekt/build/libs/SDL-release-2.30.2/CMakeFiles/SDL2-static.dir/DependInfo.cmake"
+  "/home/mezok/2sem/izg/projekt/build/libs/SDL-release-2.30.2/CMakeFiles/SDL2main.dir/DependInfo.cmake"
+  "/home/mezok/2sem/izg/projekt/build/libs/ArgumentViewer/CMakeFiles/ArgumentViewer.dir/DependInfo.cmake"
+  "/home/mezok/2sem/izg/projekt/build/libs/BasicCamera/CMakeFiles/BasicCamera.dir/DependInfo.cmake"
+  "/home/mezok/2sem/izg/projekt/build/libs/Catch2-3.3.1/src/CMakeFiles/Catch2.dir/DependInfo.cmake"
+  "/home/mezok/2sem/izg/projekt/build/libs/TxtUtils/CMakeFiles/TxtUtils.dir/DependInfo.cmake"
+  "/home/mezok/2sem/izg/projekt/build/libs/MealyMachine/CMakeFiles/MealyMachine.dir/DependInfo.cmake"
+  )
+
+# Fortran module output directory.
+set(CMAKE_Fortran_TARGET_MODULE_DIR "")
