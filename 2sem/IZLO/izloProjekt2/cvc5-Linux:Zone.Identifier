@@ -1,0 +1,4 @@
+[ZoneTransfer]
+ZoneId=3
+ReferrerUrl=https://github.com/cvc5/cvc5/releases/tag/cvc5-1.0.5
+HostUrl=https://objects.githubusercontent.com/github-production-release-asset-2e65be/7040894/0d8d2d59-b55a-4b3f-93b0-2dfdc5c147cf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20240316%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240316T195045Z&X-Amz-Expires=300&X-Amz-Signature=c977ad1f5fa4dfc3510980eaea5f1d350200c862ec2c375fb7529d629e5cdf5a&X-Amz-SignedHeaders=host&actor_id=80980004&key_id=0&repo_id=7040894&response-content-disposition=attachment%3B%20filename%3Dcvc5-Linux&response-content-type=application%2Foctet-stream
