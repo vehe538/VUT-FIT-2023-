@@ -1,0 +1,4 @@
+cc -std=c11 -o ifjcompiler codegen.c error.c expr_stack.c main.c parser.c prec_table.c psa.c symtable.c tokeniser.c
+symtable.c:13:9: warning: #pragma once in main file
+   13 | #pragma once
+      |         ^~~~
