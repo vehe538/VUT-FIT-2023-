@@ -1,0 +1,28 @@
+vsetko po stromy vratane, vyhladavanie nie, prve 4 pdfka
+
+
+- def ADT:
+	- abstraktny datovy typ je definovany mnozinou hodnot, ktorych smie kazdy prvok tohto typu nadobudnut 
+	  a mnozinou operacii nad tymto typom
+	
+- def. ADT zoznam:
+	- je to linearna, homogenna, dynamicka datova struktura
+
+- rekurzivna def. dlzky zoznamu:
+	- ak je zoznam prazdny jeho dlzka je nula. V inom pripade je jeho dlzka 1 plus dlzka zysku zoznamu
+
+- rekurzivna def. ekvivalencie dvoch zoznamov:	
+	- dva zoznamy su ekvivalentne a su obidva prazdne alebo ak sa rovnaju ich prve prvky a sucasne ich zvysky
+
+- rekurzivna def. binarneho stromu:
+	- bin. strom je bud prazdny alebo pozostava z jedneho uzla zvanom koren a dvoch bin. podstromov - laveho a praveho
+
+- vyska stromu:
+	- pocet hran od korena po najvzdialenejsi uzol plus 1
+
+Bin. strom je vahovo vyvazeny ak pre kazdy jeho uzol plati ze pocet uzlo laveho podstromu sa rovna poctu uzlov praveho podstromu alebo sa lisia prave o 1
+Bin. strom je vyskovo vyvazeny ak pre kazdy jeho uzol plati, ze vyska laveho postromu sa rovna vyske praveho podstromu alebo sa lisia prave o 1
+
+
+
+

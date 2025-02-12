@@ -1,0 +1,118 @@
+dynamicke programovanie: - rozdelenie vacsich problemov na mensie podproblemy
+			 - pri narocnych rekurzivnych vypoctoch si viem napr. ulozit vysledky opakujucich sa vypoctov do tabulky a vysledky tahat odtial - znizim narocnost
+
+prirodzenost zoradovacej metody:
+	- doba potrebna k zoradeniu nahodne usporiadaneho pola je vatsia, nez doba potrebna na zoradenie uz usporiadaneho pola
+	- doba potrebna k zoradniu opacne usporiadaneho pola je vatsia, nez doba potreba na zoradenie nahodne usporiadaneho pola
+	- inak sa alg. nesprava prirodzene 
+	- bubble-sort, bubble-insert, binary-insert, mergesort, list-merge	
+
+
+stabilita zoradovacej metody:
+	- vyjadruje, ci mechanizmus algoritmu zachovava relativne poradie klucov s rovnakou hodnotou
+	- ak je v poli viac rovnych klucov a alg. po zoradeni zachova ich poradie, je stabilny inak nestabilny
+	- bubblesort, bubbleinsert, binaryinsert, mergesort, list-merge, radix	
+
+in situ: - vyjadruje, ci algoritmus potrebuje nejaku pomocnu pamet (nepracuje in situ) alebo nie (pracuje in situ)
+
+
+vaha stromu: pocet uzlov laveho/praveho podstromu
+vyska stromu: pocet 'urovni' laveho/praveho podstromu
+
+
+sorting:
+
+- Select sort - nastavim minimum na prvy prvok, prechadzam pole, ak najdem mensie zmenim minimum, nakonci zamenim prvy prvok za minimum a opakujem to znova ale od druheho prvku, atd.:
+- Bubble sort - porovavame kazdu dvojicu, ak je skorsi prvok vacsi, vymenime ich; pouzijeme dvojity cyklus
+- Heap sort - prechadzam po strome zlava doprava, spravim z neho maxheap (upravim uzle tak aby bol najvacsi hore) operaciou sift, zapisem 
+	      do pola zase zlava doprava, vymenim prvy s poslednym, posledny je spravne uz, urobim to znova pre pole, ale bez posledneho indexu (lebo ten uz je),
+	       opakujem az kym to neni zoradene
+
+- (Bubble) insert - na zaciatku urcim prvy prvok ako usporiadany, ak nasledujuci je vacsi, je to spravne, ak ne, vymenim dany prvok s poslednym usporiadanym. Ak stale nevyhovuje podmienke
+	   	    znova vymeniam az kym neni na spravnej pozicii - napravo od prvku, ktory je mensi
+- Binary-insert - kombinacia binary search a bubbleinsertu, v podstate hladam v zoradenej casti miesto pre nezoradeny prvok upravovanim left, right hranic, nasledne posuniem vsetky prvky
+		  a vlozim na dane miesto nezoradeny prvok 
+
+
+- Quicksort - rozdeli sa pole podla medianu, nalavo by mali byt len mensie prvky, napravo vacsie, ak nejaky nesedi vymeni sa s tym co nesedi na druhej strane alebo s medianom 
+	    - ak je skumany interval od medianu po median, dany prvok je na spravnej pozicii a algoritmus sa pouzije na vznikle polovice
+- Shell sort - urcim si krok (polovica poctu prvkov) a dvojice vzdialene prave o tento krok vymenim, aby bol mensi prvy, nasledne opakujem ale o polovicu mensim krokom
+
+
+- Merge sort - rozdelim sa polovice az kym nebudem mat samostatne polozky, vytvorim dvojice, ktore budu usporiadane, nasledne vytvorim usporiadane stvorice, atd.
+- Seq-merge - mergujem neklesajuce postupnosti iduce z oboch koncov pola a ulozim na zaciatok pomocneho pola, druhe mergnute postupnosti ulozim na koniec pomocneho pola atd.
+	    - kam ukladam, sa strieda az kym nemam jednu neklesajucu postupnost.
+- List-merge - zlucuju sa dve po sebe iduce neklesajuce postupnosti, pouzivaju sa pointre o jeden vacsi
+- Radix - najprv zoradim prvky podla jednotiek (zachovavam relativne poradie), potom podla desiatok, stoviek atd. 
+
+
+zlozitost:
+	- omikron - horne ohranicenie nejakej funckie od n0
+	- omega - spodne ohranicenie nejakej funkcie od n0
+	- theta - kombinacia oboch ohraniceni -> ohranicuje zhora aj zdola - tvori oblast
+
+
+TRP s implicitnym zretazenim - nasledovnik je funkciou predosleho prvu, prvky su ulozene podla kroku v tabulke za sebou
+TRP s explicitnym zretazenim - prvky maju v sebe ulozene ukazatele na zaciatky zoznamov synonym
+
+
+big O:
+
+select sort - O(n^2)   
+bubble sort - O(n^2)
+heap sort - O(n*logn)
+bubble-insert - O(n^2)
+binary-insert - O(n^2)
+quicksort - O(n^2)
+shell sort - O(n*logn)
+merge sort - O(n*logn)
+seq-merge - O(n*logn)
+list-merge - O(n*logn)
+radix - O(n*logn)
+
+
+Zrusenie uzlu s jednym synom:
+	- rodicovsky uzol ruseneho bude ukazovat na uzol, na ktory ukazuje ruseny uzol
+
+Zrusenie uzlu s dvoma synmi:
+	- zamenim hodnotu a otca napravejsieho syna laveho podstromu a zrusim dany uzol
+	- alebo zamenim hodnotu otca a najlavejsieho syna praveho podstromu a zrusim dany uzol
+
+AVL stromy:
+
+	- kriticky uzol -> najvzdialenejsi uzol od korena, ktore rovnovaha je v dosledku pridavania alebo rusenia uzla porusena
+
+	- LL -> kriticky uzol je prilis tazku vlavo a jeho lavy syn  je tazky vlavo
+	- LP -> kriticky uzol je prilis tazky vlavo a jeho lavy syn je tazky vpravo
+	- PP -> kriticky uzol je prilis tazky vpravo a jeho pravy syn je tazky vpravo
+	- PL -> kriticky uzol je prilis tazky vpravo a jeho pravy syn je tazky vlavo
+
+	riesenia:
+		- LL - rotacia vpravo
+		- LP - rotacia vlavo potom vpravo
+		- PP - rotacia vlavo 
+		- PL - rotacia vpravo potom vlavo
+
+
+(a,b) - stromy:
+
+	1. koren ma 2 az b synov, ostatne vnutorne uzly maju a az b synov
+	2. vsetky vnutorne uzly som v rovnakej hlbke
+
+	- vkladanie:
+		- pridam k uzlu s prislusnym klucom podstrom tak aby som zachoval pravidla pre a,b strom
+		- ak sa neda vkladat mozem nejaky uzol rozstiepit - stredny uzol (z uzla s troma klucmi) pridam do otcovskeho, 
+		  vytvori sa mi o jeden uzol viac nez mal otcovsky predtym a novy prvok pridam do jedneho z nich
+	- mazanie:
+		- kluc na najnizsej urvoni mozem zmazat priamo ak neporusim pravidla
+		- kluc na vyssej urovni nahradim nejakym blizkym klucom na najnizsej urovni a ten potom zmazem tak, aby som neporusil pravidlo
+		- ak potrebujem a nieje ina moznost, mozem si pozicat kluc od susedneho uzla => najblizsi kluc od suseda zamenim za prislusny kluc u otca a ten co bol u otca dam 
+		  na miesto mazaneho uzla
+		- ak si nemozem pozicat od susedneho, poziciam si od otcovskeho uzla  
+
+BM algoritmus:
+	- CharJump[a] = m-1-k
+	- a - znak zhody v texte a patterne, m-1 - index posledneho znaku vzorku, k - index najpravejsieho vyskytu	
+	
+
+
