@@ -28,6 +28,7 @@ void prepareModel(GPUMemory&mem,CommandBuffer&commandBuffer,Model const&model){
 }
 //! [drawModel]
 
+
 /**
  * @brief This function represents vertex shader of texture rendering method.
  *
