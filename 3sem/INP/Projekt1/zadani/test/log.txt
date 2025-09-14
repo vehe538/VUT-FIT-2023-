@@ -1,0 +1,161 @@
+ghdl -i --ieee=synopsys -fexplicit --workdir=build --work=work ../src/cpu.vhd
+ghdl -m --ieee=synopsys -fexplicit --workdir=build -Pbuild --work=work cpu
+ghdl -r --ieee=synopsys -fexplicit --workdir=build -Pbuild --work=work cpu --vpi=/home/msik/skola/inp/inp24-projekt1/env/lib/python3.12/site-packages/cocotb/libs/libcocotbvpi_ghdl.so --wave=build/wave.ghw 
+     -.--ns INFO     gpi                                ..mbed/gpi_embed.cpp:109  in set_program_name_in_venv        Using Python virtual environment interpreter at /home/msik/skola/inp/inp24-projekt1/env/bin/python
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:101  in gpi_print_registered_impl       VPI registered
+     0.00ns INFO     cocotb                             Running on GHDL version 4.1.0 (Ubuntu 4.1.0+dfsg-0ubuntu2) [Dunoon edition]
+     0.00ns INFO     cocotb                             Running tests with cocotb v1.7.1 from /home/msik/skola/inp/inp24-projekt1/env/lib/python3.12/site-packages/cocotb
+     0.00ns INFO     cocotb                             Seeding Python random module with 1731364879
+     0.00ns INFO     cocotb.hexdigest                   lib: 47382bf4ccf309a0c56cb33a5e15d78e
+     0.00ns INFO     cocotb.regression                  Found test cpu.test_reset
+     0.00ns INFO     cocotb.regression                  Found test cpu.test_init
+     0.00ns INFO     cocotb.regression                  Found test cpu.test_increment
+     0.00ns INFO     cocotb.regression                  Found test cpu.test_decrement
+     0.00ns INFO     cocotb.regression                  Found test cpu.test_move
+     0.00ns INFO     cocotb.regression                  Found test cpu.test_print
+     0.00ns INFO     cocotb.regression                  Found test cpu.test_input
+     0.00ns INFO     cocotb.regression                  Found test cpu.test_while_loop
+     0.00ns INFO     cocotb.regression                  Found test cpu.test_tmp
+     0.00ns INFO     cocotb.regression                  Found test cpu.test_login_msik
+     0.00ns INFO     cocotb.regression                  running test_reset (1/10)
+     0.00ns INFO     cocotb.hexdigest                   test: 4c8909ecb1f3dbb04ff0e5998b2aad00
+../../src/synopsys/std_logic_arith.vhdl:255:21:@0ms:(assertion warning): There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+    51.00ns INFO     cocotb.regression                  test_reset passed
+    51.00ns INFO     cocotb.regression                  running test_init (2/10)
+                                                          Procesor initialization test
+    51.00ns INFO     cocotb.hexdigest                   test: 15cd44aa106c2fb5e88bb5de0f15d3d9
+    52.00ns INFO     cocotb.hexdigest                   code: 420cd9f16e90b08dbdf5195fdd9d0f62 len: 1
+   141.00ns INFO     cocotb.hexdigest                   result: 420cd9f16e90b08dbdf5195fdd9d0f62
+   141.00ns INFO     cocotb.regression                  test_init passed
+   141.00ns INFO     cocotb.regression                  running test_increment (3/10)
+                                                          Increment value of the first memory cell, i.e. *ptr++
+   141.00ns INFO     cocotb.hexdigest                   test: 4739eef9b463d24e26aa7f26ba5b87e2
+   142.00ns INFO     cocotb.hexdigest                   code: 83fdb8859bf9b7036a839b918e308b60 len: 4
+   311.00ns INFO     cocotb.hexdigest                   result: f899c9623b750aba76adbf3e374529f5
+   311.00ns INFO     cocotb.regression                  test_increment failed
+                                                        Traceback (most recent call last):
+                                                          File "/home/msik/skola/inp/inp24-projekt1/zadani/test/scripts/cpu_lib.py", line 276, in fff
+                                                            return await fg(dut)
+                                                                   ^^^^^^^^^^^^^
+                                                          File "/home/msik/skola/inp/inp24-projekt1/zadani/test/cpu.py", line 39, in test_increment
+                                                            assert mem[4] == 3
+                                                        AssertionError: assert 0 == 3
+   311.00ns INFO     cocotb.regression                  running test_decrement (4/10)
+                                                          Decrement value of the first memory cell, i.e. *ptr--
+   311.00ns INFO     cocotb.hexdigest                   test: 44e9bfabe76161ba90f484025551cf9c
+   312.00ns INFO     cocotb.hexdigest                   code: 0772f54a199d95c25fff832f480c9d84 len: 4
+   501.00ns INFO     cocotb.hexdigest                   result: 189beb00890fcbc27d736b97e3fa1caf
+   501.00ns INFO     cocotb.regression                  test_decrement failed
+                                                        Traceback (most recent call last):
+                                                          File "/home/msik/skola/inp/inp24-projekt1/zadani/test/scripts/cpu_lib.py", line 276, in fff
+                                                            return await fg(dut)
+                                                                   ^^^^^^^^^^^^^
+                                                          File "/home/msik/skola/inp/inp24-projekt1/zadani/test/cpu.py", line 47, in test_decrement
+                                                            assert mem[4] == 0
+                                                        AssertionError: assert 3 == 0
+   501.00ns INFO     cocotb.regression                  running test_move (5/10)
+                                                          Move the pointer to the next cell and increment its value
+   501.00ns INFO     cocotb.hexdigest                   test: 0c4d156dfa0b65e52fb43be0d32dd4d6
+   502.00ns INFO     cocotb.hexdigest                   code: 7c1cd3f96fc2c2ff2e089c27cfda24b6 len: 3
+  1556.00ns INFO     cocotb.regression                  test_move failed
+                                                        Traceback (most recent call last):
+                                                          File "/home/msik/skola/inp/inp24-projekt1/zadani/test/scripts/cpu_lib.py", line 276, in fff
+                                                            return await fg(dut)
+                                                                   ^^^^^^^^^^^^^
+                                                          File "/home/msik/skola/inp/inp24-projekt1/zadani/test/cpu.py", line 53, in test_move
+                                                            instcnt, mem, _ = await run_program(dut, '>+@')
+                                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/msik/skola/inp/inp24-projekt1/zadani/test/scripts/cpu_lib.py", line 262, in run_program
+                                                            proglen, mem = await with_timeout(meminst, timeout_ns, 'ns')
+                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/msik/skola/inp/inp24-projekt1/env/lib/python3.12/site-packages/cocotb/triggers.py", line 1013, in with_timeout
+                                                            raise cocotb.result.SimTimeoutError
+                                                        cocotb.result.SimTimeoutError
+  1556.00ns INFO     cocotb.regression                  running test_print (6/10)
+                                                          Print data to the output, i.e. putchar(*ptr)
+  1556.00ns INFO     cocotb.hexdigest                   test: 536f0473ce286459317fa46cb383cbb0
+  1557.00ns INFO     cocotb.hexdigest                   code: b265746fe722436c7a1a1d8de199b058 len: 4
+  5111.00ns INFO     cocotb.regression                  test_print failed
+                                                        Traceback (most recent call last):
+                                                          File "/home/msik/skola/inp/inp24-projekt1/zadani/test/scripts/cpu_lib.py", line 276, in fff
+                                                            return await fg(dut)
+                                                                   ^^^^^^^^^^^^^
+                                                          File "/home/msik/skola/inp/inp24-projekt1/zadani/test/cpu.py", line 61, in test_print
+                                                            instcnt, mem, lcd = await run_program(dut, '...@012', timeout_ns=LCD_WAIT_TIME*5 + 1000)
+                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/msik/skola/inp/inp24-projekt1/zadani/test/scripts/cpu_lib.py", line 262, in run_program
+                                                            proglen, mem = await with_timeout(meminst, timeout_ns, 'ns')
+                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/msik/skola/inp/inp24-projekt1/env/lib/python3.12/site-packages/cocotb/triggers.py", line 1013, in with_timeout
+                                                            raise cocotb.result.SimTimeoutError
+                                                        cocotb.result.SimTimeoutError
+  5111.00ns INFO     cocotb.regression                  running test_input (7/10)
+                                                          Load data from the input, i.e. *ptr=getchar()
+  5111.00ns INFO     cocotb.hexdigest                   test: 7502d95b5b32a2d0bb7089e434631b1f
+  5112.00ns INFO     cocotb.hexdigest                   code: d3fac245532f03964cd19007b2032729 len: 4
+  5771.00ns INFO     cocotb.hexdigest                   result: d3fac245532f03964cd19007b2032729
+  5771.00ns INFO     cocotb.regression                  test_input failed
+                                                        Traceback (most recent call last):
+                                                          File "/home/msik/skola/inp/inp24-projekt1/zadani/test/scripts/cpu_lib.py", line 276, in fff
+                                                            return await fg(dut)
+                                                                   ^^^^^^^^^^^^^
+                                                          File "/home/msik/skola/inp/inp24-projekt1/zadani/test/cpu.py", line 68, in test_input
+                                                            assert mem[4] == ord('2')
+                                                        AssertionError: assert 0 == 50
+                                                         +  where 50 = ord('2')
+  5771.00ns INFO     cocotb.regression                  running test_while_loop (8/10)
+                                                          Simple while loop test
+  5771.00ns INFO     cocotb.hexdigest                   test: 881f4f180e4ac6b37ee21fe58705b9ea
+  5772.00ns INFO     cocotb.hexdigest                   code: dc8bee53ab9c57eaa957fd0fe2002e38 len: 5
+ 10826.00ns INFO     cocotb.regression                  test_while_loop failed
+                                                        Traceback (most recent call last):
+                                                          File "/home/msik/skola/inp/inp24-projekt1/zadani/test/scripts/cpu_lib.py", line 276, in fff
+                                                            return await fg(dut)
+                                                                   ^^^^^^^^^^^^^
+                                                          File "/home/msik/skola/inp/inp24-projekt1/zadani/test/cpu.py", line 77, in test_while_loop
+                                                            instcnt, mem, lcd = await run_program(dut, '[.-]@\3', timeout_ns = LCD_WAIT_TIME*10)
+                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/msik/skola/inp/inp24-projekt1/zadani/test/scripts/cpu_lib.py", line 262, in run_program
+                                                            proglen, mem = await with_timeout(meminst, timeout_ns, 'ns')
+                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/msik/skola/inp/inp24-projekt1/env/lib/python3.12/site-packages/cocotb/triggers.py", line 1013, in with_timeout
+                                                            raise cocotb.result.SimTimeoutError
+                                                        cocotb.result.SimTimeoutError
+ 10826.00ns INFO     cocotb.regression                  running test_tmp (9/10)
+                                                          Simple temp register test
+ 10826.00ns INFO     cocotb.hexdigest                   test: 45dbc49d9b480a7e6eb25900606db176
+ 10827.00ns INFO     cocotb.hexdigest                   code: 77503a20e66588894e22aab0fb92677f len: 6
+ 11086.00ns INFO     cocotb.hexdigest                   result: 8646ce30fbb3aaebfac8f53488cd1f75
+ 11086.00ns INFO     cocotb.regression                  test_tmp passed
+ 11086.00ns INFO     cocotb.regression                  running test_login_msik (10/10)
+                                                          Executes program in login.b file
+ 11086.00ns INFO     cocotb.hexdigest                   test: 3c8d39a11d4cda37de2143826a264593
+ 11087.00ns INFO     cocotb.hexdigest                   code: d3853c4853b9aac3cdff851e32bf9473 len: 120
+ 15526.00ns INFO     cocotb.hexdigest                   result: de5e1457dfab6b2ff2c71fbef397dc56
+ 15526.00ns INFO     cocotb.regression                  test_login_msik failed
+                                                        Traceback (most recent call last):
+                                                          File "<makefun-gen-1>", line 2, in test_login_msik
+                                                          File "/home/msik/skola/inp/inp24-projekt1/zadani/test/scripts/cpu_lib.py", line 272, in ff
+                                                            return await fg(dut, uid)
+                                                                   ^^^^^^^^^^^^^^^^^^
+                                                          File "/home/msik/skola/inp/inp24-projekt1/zadani/test/cpu.py", line 98, in test_login
+                                                            assert lcd == uid, "Invalid output"
+                                                        AssertionError: Invalid output
+                                                        assert '<<<+\x00' == 'msik'
+ 15526.00ns INFO     cocotb.regression                  ***************************************************************************************
+                                                        ** TEST                           STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                        ***************************************************************************************
+                                                        ** cpu.test_reset                  PASS          51.00           0.00      52882.45  **
+                                                        ** cpu.test_init                   PASS          90.00           0.00      30437.62  **
+                                                        ** cpu.test_increment              FAIL         170.00           0.00      49184.78  **
+                                                        ** cpu.test_decrement              FAIL         190.00           0.00      46099.25  **
+                                                        ** cpu.test_move                   FAIL        1055.00           0.01      87032.45  **
+                                                        ** cpu.test_print                  FAIL        3555.00           0.04      96656.11  **
+                                                        ** cpu.test_input                  FAIL         660.00           0.01      82844.25  **
+                                                        ** cpu.test_while_loop             FAIL        5055.00           0.05      99315.67  **
+                                                        ** cpu.test_tmp                    PASS         260.00           0.00      58788.09  **
+                                                        ** cpu.test_login_msik             FAIL        4440.00           0.05      94250.68  **
+                                                        ***************************************************************************************
+                                                        ** TESTS=10 PASS=3 FAIL=7 SKIP=0              15526.00           0.25      61094.00  **
+                                                        ***************************************************************************************
+                                                        

@@ -1,0 +1,8 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1731365196" />
+    <testcase name="test_login_msik" classname="cpu" file="&lt;makefun-gen-1&gt;" lineno="1" time="0.05141043663024902" sim_time_ns="4440.000001" ratio_time="86363.787044508">
+      <failure />
+    </testcase>
+  </testsuite>
+</testsuites>

@@ -1,0 +1,4 @@
+v 4
+file "/home/msik/skola/inp/inp24-projekt1/zadani/test/" "build/cpu_synth.vhd" "4b82b1a8b34b263a944adb68fde9009e79897303" "20241111224020.803":
+  entity cpu at 1( 0) + 0 on 11;
+  architecture rtl of cpu at 26( 691) + 0 on 12;
