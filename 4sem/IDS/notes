@@ -1,0 +1,48 @@
+CREATE VIEW viewname1
+AS
+SELECT a1, a2 FROM tab
+WHERE ...
+
+
+CREATE MATERIALIZED VIEW mview
+BUILD [ IMMEDIATE | DEFFERED]
+REFRESH [ FORCE | FAST | COMPLETE] ON [ DEMAND | COMMIT ]
+[ENABLE | DISABLE ] QUERRY REWRITE
+AS
+SELECT ...
+WHERE ...
+
+CREATE TRIGGER trigname
+AFTER | BEFORE UPDATE/INSERT/DELETE ON tabname
+FOR EACH ROW
+BEGIN
+	...
+	...
+END 
+
+CREATE PROCEDURE procnae (arg1, arg2)
+BEGIN
+...
+END;
+
+
+CREATE FUNCTION func (arg1, arg2)
+RETURN NUMBER num IS NUMBER
+BEGIN
+
+...
+
+
+END
+
+usporiadany index:
+	- je zalozeny na zoradeni hodnot vyhl. kluca
+	- typy: 
+		- primarny index - index pre primarny vyhladavajuci kluc
+		- sekundarny index - index pre sekunarny vyhladavaci kluc
+
+		- husty idnex - index s polozkami, ktore obsahuju vsetky hodnoty vyhl. kluca, ktore sa vyskutuju v primarnom subore
+		- riedky index - index s polozkami, ktore obsahujue len niektore hodnoty prim. kluca, ktore sa vyskytuju v primarnom subore
+
+hashovany index:
+	- zalozeny na hashovani
