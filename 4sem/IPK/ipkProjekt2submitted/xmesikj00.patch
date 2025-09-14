@@ -1,0 +1,253 @@
+diff --git a/README.md b/README.md
+index 8938598..1a2f5e6 100644
+--- a/README.md
++++ b/README.md
+@@ -25,9 +25,9 @@ Po spustení a načítaní argumentov funkcia prevedie adresu servera zo vstupu
+ 
+ Funkcia najprv vytvorí TCP socket pomocou `socket()` funkcie a štruktúru `destination`, ktorá obsahuje zadaný cieľový port a adresu servera. Pripojenie na server je uskutočnené funkciou `connect()`. Do štruktúry globálnych premenných sú pridané hodnoty socketu a používaný protokol.
+ 
+-Program zavolá funkciu `authState()`, ktorá implementuje správanie programu počas čakania na `\auth` príkaz od užívateľa podľa zadania. Predtým alokuje pamäť pre `username`(povolená dĺžka + '\0' = 21 bajtov), `displayname` (povolená dĺžka + '\0' = 21 bajtov) a `secret` (povolená dĺžka + '\0' = 129 bajtov). Taktiež vytvára pomocné buffery pre vytváranie správ a spracovanie prichádzajúcich packetov. While cyklus pomocou funkcie `select()` čaká na prichádzajúce správy na zadanom socket-e, a zároveň sníma štandardný vstup. Po úspešnom spracovaní a odoslaní príkazu `\auth` program skontroluje získané hodnoty pros. funkcie `isValid()` a zapíše získané hodnoty `username`, `displayname` a `secret` do štruktúry globálnych premenných a zavolá funkciu `openState()`. Pri neúspešnom príkaze `\auth` sú uvoľnené alokované položky a funkcia je rekurzívne zavolaná. Ak by v tomto stave prišiel na socket packet typu `BYE` alebo `ERR` (v programe je skontrolované prvé písmeno prichádzajúcej správy), vytvorí a vypíše sa správa `ERROR: ...` a program prejde do `endState()`, kde sa uzavrie otvorený socket a program skončí.
++Program zavolá funkciu `authState()`, ktorá implementuje správanie programu počas čakania na `/auth` príkaz od užívateľa podľa zadania. Predtým alokuje pamäť pre `username`(povolená dĺžka + '\0' = 21 bajtov), `displayname` (povolená dĺžka + '\0' = 21 bajtov) a `secret` (povolená dĺžka + '\0' = 129 bajtov). Taktiež vytvára pomocné buffery pre vytváranie správ a spracovanie prichádzajúcich packetov. While cyklus pomocou funkcie `select()` čaká na prichádzajúce správy na zadanom socket-e, a zároveň sníma štandardný vstup. Po úspešnom spracovaní a odoslaní príkazu `/auth` program skontroluje získané hodnoty pros. funkcie `isValid()` a zapíše získané hodnoty `username`, `displayname` a `secret` do štruktúry globálnych premenných a zavolá funkciu `openState()`. Pri neúspešnom príkaze `/auth` sú uvoľnené alokované položky a funkcia je rekurzívne zavolaná. Ak by v tomto stave prišiel na socket packet typu `BYE` alebo `ERR` (v programe je skontrolované prvé písmeno prichádzajúcej správy), vytvorí a vypíše sa správa `ERROR: ...` a program prejde do `endState()`, kde sa uzavrie otvorený socket a program skončí.
+ 
+-Vo funkcii `openState()` program čaká na vstup od užívateľa a zároveň sníma komunikáciu na sockete rovnakým spôsobom ako v `authState()`. Vstupom môžu byť príkazy `\join`, `\rename` alebo `\help`. V prípade, že je vstupom čokoľvek iné, bude to vyhodnotené ako regulérna správa `MSG` a cez funkciu `buildMsgTcp()` sa vytvorí TCP packet typu `MSG` a odošle sa serveru. Po prijatí správy typu MSG sa zavolá funkcia `buildIncomingtMsgTcp()`, ktorá do pripraveného bufferu vloží reťazec so štruktúrou prichádzajúcej správy (`{DisplayName}: {MessageContent}`). Po prijatí ERR sa predpokladá, že je zo servera, a teda, že musíme prejsť do konečného stavu. Predtým je na výstup vypísaná relevantná správa.
++Vo funkcii `openState()` program čaká na vstup od užívateľa a zároveň sníma komunikáciu na sockete rovnakým spôsobom ako v `authState()`. Vstupom môžu byť príkazy `/join`, `/rename` alebo `/help`. V prípade, že je vstupom čokoľvek iné, bude to vyhodnotené ako regulérna správa `MSG` a cez funkciu `buildMsgTcp()` sa vytvorí TCP packet typu `MSG` a odošle sa serveru. Po prijatí správy typu MSG sa zavolá funkcia `buildIncomingtMsgTcp()`, ktorá do pripraveného bufferu vloží reťazec so štruktúrou prichádzajúcej správy (`{DisplayName}: {MessageContent}`). Po prijatí ERR sa predpokladá, že je zo servera, a teda, že musíme prejsť do konečného stavu. Predtým je na výstup vypísaná relevantná správa.
+ 
+ V `joinState()` by po prijatí správy typu `MSG` mal program ostať v tomto stave, až kým nedostane správu `REPLY`. Toto sa ale nedá vyriešiť rekurzívnym volaním `joinState()` (ako to bolo v auth stave), pretože by to znamenalo odoslanie novej identickej `JOIN` správy. Tento problém som vyriešil tak, že keď vo funkcii odošlem `JOIN` správu a zaznamenám odpoveď, vo while cykle, ktorý nasleduje, skontrolujem prvé písmeno odpovede. Ak sa jedna o `MSG`, na výstup sa vypíše adekvátna správa a znova sa zavolá `receivePacket()`. Ak je odpoveď typu REPLY (na tú čakáme), vypíše sa správa pomocou `buildActionStatusTcp()`, cyklus sa preruší a zavolá funkciu `openState()`. V prípade `ERR` správy sa vypíše relevantná správa na výstup, preruší sa cyklus a prejdem do konečného stavu `endState()`. Týmto zaručím, že mimo prípadu, kedy dostanem `REPLY` (úspech alebo neúspech) sa nepresuniem do `openState()`.
+ 
+@@ -38,7 +38,7 @@ Teda ak napríklad pošlem serveru správnu `AUTH` správu a server mi pošle sp
+ 
+ Funkcia simulujúca počiatočný stav vytvorí socket typu `SOCK_DGRAM` a štruktúru destination podobne ako v predošlej variante a inicializuje globálne premenné.  
+ 
+-Túto variantu sa mi podarilo implementovať iba pre stav `authState()`. Pre poslanie správy `\auth` sa cez volanie funkcie `buildAuthUdp()` do pomocného bufferu v  pomocou `memcpy()` vložia potrebné komponenty. Na začiatku funkcie vždy inicializujem hexadecimálnu reprezentáciu typu správy (0x02 pre `AUTH`) a index, ktorý používam na posúvanie sa po bytoch - po vložení adresy typu inkrementujem index o jedna, lebo typ má zaberať 1 byte, následne vložím adresu premennej `messageID` a inkrementujem index o dva, lebo ID správy by mal zaberať 2 byte-y a týmto spôsobom pokračujem ďalej.
++Túto variantu sa mi podarilo implementovať iba pre stav `authState()`. Pre poslanie správy `/auth` sa cez volanie funkcie `buildAuthUdp()` do pomocného bufferu v  pomocou `memcpy()` vložia potrebné komponenty. Na začiatku funkcie vždy inicializujem hexadecimálnu reprezentáciu typu správy (0x02 pre `AUTH`) a index, ktorý používam na posúvanie sa po bytoch - po vložení adresy typu inkrementujem index o jedna, lebo typ má zaberať 1 byte, následne vložím adresu premennej `messageID` a inkrementujem index o dva, lebo ID správy by mal zaberať 2 byte-y a týmto spôsobom pokračujem ďalej.
+ 
+ Kvôli rôznym variantám som pridal do štruktúry globálnych premenných protokol, ktorý je určený na základe vstupu užívateľa argumentom `-t` . Túto hodnotu by som neskôr podobne ako v `authState()` používal na odlíšenie, ktorý typ správy by som vkladal do pomocného bufferu a tiež na odlíšenie správaní `sendPacket()` a `receivePacket()`, napr. aký typ správy sa očakáva.
+ 
+@@ -58,6 +58,7 @@ x86_64
+ 2. použitý CLI príkaz + užívateľský vstup
+ 3. obrázok výstupu wiresharku a konzoly + príloha daného .pcap súboru
+ 
++**Na snímkach obrazovky z testovania sú príkazy rozhrania s nesprávnym typom lomítka - táto chyba je už opravená - výstup je rovnaký so správnym znakom**
+ 
+ ### Test 1
+ 
+@@ -67,7 +68,7 @@ Tento test demonštruje jednoduché pripojenie sa na referenčný discord server
+ **2.** 
+ ```
+ ./ipk25chat-client -t tcp -s anton5.fit.vutbr.cz -r 5
+-\auth xmesikj00 8fde6dea-ca95-4384-82e3-f79ee0cf8e23 test1
++/auth xmesikj00 8fde6dea-ca95-4384-82e3-f79ee0cf8e23 test1
+ test
+ ^C
+ 
+@@ -81,15 +82,15 @@ ___
+ ### Test 2
+ 
+ **1.** 
+-Test obsahuje úspešné pripojenie na ref. server a pomocou `join` príkazu aj úspešnú zmenu kanálu. Užívateľ  pod svojím prvým menom odoslal správu `name1`, následne použil príkaz `\rename` a odoslal pod svojím novým menom správu `name2`. Program je ukončený znakom EOF.
++Test obsahuje úspešné pripojenie na ref. server a pomocou `join` príkazu aj úspešnú zmenu kanálu. Užívateľ  pod svojím prvým menom odoslal správu `name1`, následne použil príkaz `/rename` a odoslal pod svojím novým menom správu `name2`. Program je ukončený znakom EOF.
+ 
+ **2.**
+ ```
+ ./ipk25chat-client -t tcp -s anton5.fit.vutbr.cz -r 
+-\auth xmesikj00 8fde6dea-ca95-4384-82e3-f79ee0cf8e23 test2
+-\join discord.jj
++/auth xmesikj00 8fde6dea-ca95-4384-82e3-f79ee0cf8e23 test2
++/join discord.jj
+ name1
+-\rename test22
++/rename test22
+ name2
+ ```
+ ___
+@@ -100,7 +101,7 @@ ___
+ **2.** 
+ ```
+ ./ipk25chat-client -t tcp -s anton5.fit.vutbr.cz
+-\auth xmesikj00 invalidsecret test3
++/auth xmesikj00 invalidsecret test3
+ ^C
+ 
+ ```
+@@ -116,7 +117,7 @@ ___
+ **2.**
+ ```
+ ./ipk25chat-client -t tcp -s anton5.fit.vutbr.cz
+-\auth xmesikj00 8fde6dea-ca95-4384-82e3-f79ee0cf8e23 test4
++/auth xmesikj00 8fde6dea-ca95-4384-82e3-f79ee0cf8e23 test4
+ ```
+ **3.**
+ [test4 .pcap](./PCAPs/test4.pcapng)
+@@ -125,13 +126,13 @@ ___
+ ___
+ ### Test 5
+ 
+-**1.** V teste som použil vlastný server na localhoste, ktorý som nastavil tak, aby na príkaz `\join` poslal naspäť packet v nesprávnom formáte. Vidíme, ze program správne vyhodnotil, že sa jedna o chybu - vypísal `ERROR: ...` na výstup, poslal `ERR` packet s adekvátnou správou a spojenie ukončil.
++**1.** V teste som použil vlastný server na localhoste, ktorý som nastavil tak, aby na príkaz `/join` poslal naspäť packet v nesprávnom formáte. Vidíme, ze program správne vyhodnotil, že sa jedna o chybu - vypísal `ERROR: ...` na výstup, poslal `ERR` packet s adekvátnou správou a spojenie ukončil.
+ 
+ **2.** príkazy konzole na obr. vľavo dole:
+ ```
+-\./ipk25chat-client -t tcp -s localhost
+-\auth username secret156181 test5
+-\join invalid
++./ipk25chat-client -t tcp -s localhost
++/auth username secret156181 test5
++/join invalid
+ ```
+ **3.**
+ [test5 .pcap](./PCAPs/test5.pcapng)
+@@ -140,12 +141,12 @@ ___
+ ___
+ ### Test 6
+ 
+-**1.** Test ukazuje správanie programu pri zadaní nesprávneho `\auth` príkazu. Vidíme, že sa na výstup vypíše chybová hláška a napovedá, pričom sa neposiela žiadny packet ani sa nekončí spojenie.
++**1.** Test ukazuje správanie programu pri zadaní nesprávneho `/auth` príkazu. Vidíme, že sa na výstup vypíše chybová hláška a napovedá, pričom sa neposiela žiadny packet ani sa nekončí spojenie.
+ 
+ **2.**
+ ```
+ ./ipk25chat-client -t tcp -s localhost
+-\auth test6 invalidauth
++/auth test6 invalidauth
+ ```
+ **3.**
+ ![test6 picture](./screenshots/test6.png)
+@@ -153,12 +154,12 @@ ___
+ ___
+ ### Test 7
+ 
+-**1.** Test ukazuje pokus o pripojenie sa do kanála pred autorizáciou užívateľa príkazom `\auth`. 
++**1.** Test ukazuje pokus o pripojenie sa do kanála pred autorizáciou užívateľa príkazom `/auth`. 
+ 
+ **2.**
+ ```
+ ./ipk25chat-client -t tcp -s localhost
+-\join test7
++/join test7
+ ```
+ **3.**
+ ![test7 picture](./screenshots/test7.png)
+diff --git a/src/chat_clients.c b/src/chat_clients.c
+index a4be348..9e585d5 100644
+--- a/src/chat_clients.c
++++ b/src/chat_clients.c
+@@ -23,7 +23,7 @@ void  connectionTerm(int sig)
+ // function simulates auth FSM state
+ void authState(int server_port, char *ip_str, int socket) {
+ 
+-    //here \auth command is expected
++    //here /auth command is expected
+     char *username = malloc(21);
+     char *secret = malloc(129);
+     char *displayname = malloc(21);
+@@ -77,12 +77,12 @@ void authState(int server_port, char *ip_str, int socket) {
+             // separate client input command
+             char *command = strtok(tmp, " ");
+         
+-            if (strcmp(command, "\\help\n") == 0) {
++            if (strcmp(command, "/help\n") == 0) {
+                     
+                 printCommandsHelp();
+                 exit(EXIT_SUCCESS);
+             }
+-            else if (strcmp(command, "\\auth") == 0) {
++            else if (strcmp(command, "/auth") == 0) {
+                 
+                 char *t_username = strtok(NULL, " ");
+                 char *t_secret = strtok(NULL, " ");
+@@ -91,7 +91,7 @@ void authState(int server_port, char *ip_str, int socket) {
+                 // checking if client input consists of valid values and has allowed amount of components
+                 if (!isValid(t_username, "username") || !isValid(t_secret, "secret") || !isValid(t_displayname, "displayname")) {
+ 
+-                    printf("ERROR: \\auth command values are invalid.\n");
++                    printf("ERROR: /auth command values are invalid.\n");
+                     printCommandsHelp();
+                     authState(server_port, ip_str, socket);
+                     break;
+@@ -176,7 +176,7 @@ void authState(int server_port, char *ip_str, int socket) {
+                         endState();
+ 
+                     }
+-                    //if \auth was not successful, stay in this state
++                    //if /auth was not successful, stay in this state
+                     else if (response[7] == 'F') {
+                         authState(server_port, ip_str, socket);
+                         break;
+@@ -194,7 +194,7 @@ void authState(int server_port, char *ip_str, int socket) {
+                 free(displayname);
+                 free(secret);
+         
+-                printf("ERROR: Invalid command, \\auth command expected.\n");
++                printf("ERROR: Invalid command, /auth command expected.\n");
+                 printCommandsHelp();
+ 
+                 authState(server_port, ip_str, socket);
+@@ -308,7 +308,7 @@ void openState(int server_port, char *ip_str, int socket, char *displayname) {
+             strcpy(tmp, input);
+             char *command = strtok(tmp, " ");
+             
+-            if (strcmp(command, "\\join") == 0) {
++            if (strcmp(command, "/join") == 0) {
+ 
+                 char *t_channelid = strtok(NULL, "\n");
+ 
+@@ -323,7 +323,7 @@ void openState(int server_port, char *ip_str, int socket, char *displayname) {
+                 joinState(server_port, ip_str, socket, displayname, t_channelid);
+                 break;
+ 
+-            } else if (strcmp(command, "\\rename") == 0) {
++            } else if (strcmp(command, "/rename") == 0) {
+ 
+                 // get new displayname from input
+                 char *new_displayname = strtok(NULL, "\n");                
+@@ -336,14 +336,14 @@ void openState(int server_port, char *ip_str, int socket, char *displayname) {
+                 strncpy(displayname, new_displayname, 20);
+                 strncpy(client_info.displayname, new_displayname, sizeof(client_info.displayname));
+ 
+-            } else if (strcmp(command, "\\help\n") == 0) {
++            } else if (strcmp(command, "/help\n") == 0) {
+ 
+                 printCommandsHelp();
+                 exit(EXIT_SUCCESS);
+ 
+-            } else if (strcmp(command, "\\auth") == 0) {
++            } else if (strcmp(command, "/auth") == 0) {
+ 
+-                printf("ERROR: \\auth command was already used.\n ");
++                printf("ERROR: /auth command was already used.\n ");
+ 
+             } 
+             else {
+diff --git a/src/chat_clients.h b/src/chat_clients.h
+index 19d0c5a..e5c8c85 100644
+--- a/src/chat_clients.h
++++ b/src/chat_clients.h
+@@ -1,6 +1,7 @@
+ #include <arpa/inet.h>
+ #include <signal.h>
+ #include <stdint.h>
++#include <sys/select.h>
+ 
+ 
+ #ifndef SHARED_H
+diff --git a/src/ipk25chat-client.c b/src/ipk25chat-client.c
+index 611e1ac..aa7803b 100644
+--- a/src/ipk25chat-client.c
++++ b/src/ipk25chat-client.c
+@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
+ 
+         if (strcmp(argv[i], "-s") == 0) {
+             
+-            hostaddress = malloc(sizeof(argv[i+1])+1);
++            hostaddress = malloc(strlen(argv[i+1])+1);
+             strcpy(hostaddress, argv[i+1]);
+             has_ip = 1;
+ 
+@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
+ 
+         if (strcmp(argv[i], "-t") == 0) {
+ 
+-            protocol = malloc(sizeof(argv[i+1])+1);
++            protocol = malloc(strlen(argv[i+1])+1);
+             strcpy(protocol, argv[i+1]);
+             has_proto = 1;
+ 

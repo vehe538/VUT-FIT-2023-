@@ -1,0 +1,40 @@
+RENO:
+
+- okno zacina na minimalnej hodnote
+- kazdou uspesnym odoslanim segmentu sa zdvojnasoby jeho velkost
+- ked narazi na threshol, zacne rast linearne
+- ak dostane odosielatel tri duplicitne ACK spravy,
+  zahaji sa Fast Recovery - vrati sa na ssthres (zaciatok lin. rastu), velkost okna zredukuje na polovicu a nastavi na jeho hodnotu sshthres
+- ak nedostane ACK vobec, vrati sa na slow start a nastavi ssthres na polovicu sucasnej velkosti okna (timeout)
+
+
+DHCP:
+
+- aplikacna vrstva
+- protokol sa stara o pridelovanie adries po pripojeni na siet
+- klient posle Discover message (hlada pre seba volnu adresu), server odpovie Offer message (ponuka adries), klinet poziada o jednu, server potvrdi 
+- D - discover, O - offer, R - request, A - ackknowledgement  
+- pri Offer poskytne server: IP + mask, adresu Default gateway (nejaky router), adresu DNS, Lease time (na jak dlho na da adresu),...
+
+TCP: 
+- nepersistentne spojenie - pre kazdy vyziadany subor je realizovany novy hanshake (po prenose je ukoncene spojenie)
+- persistentne spojenie - hanshake je len na zaciatku prenosu, spojenie je ukoncene az na konci prenosu vsetkych suborov
+- RTT - cas medzi klientovym odoslanim spravy a jeho prijatim odpovede
+
+OSPF:
+- vyuziva Djikstra algo
+- vyuziva sa na velke siete
+- Link state protocol
+- na zaciatku si routere vymienaju medzi sebou vsetky informacie smerovacich tabuliek kym nemaju o celej sieti rovnaky obraz, potom 
+  sa pomocou djikstrovho alg. vybere najlepsia cesta
+
+
+RIP:
+- Routing Information Protocol
+- sietova vrstva
+- male-stredne siete
+- vyuziva Distance Vector algo
+- kazdych 30 sekund posle router smerovaciu tabulku susednym routerom, kde sa inkrementuje hopcount
+  takto sa najde cesta az k cielovemu routru a vyberie sa ta s najmensim hopcountom
+
+
