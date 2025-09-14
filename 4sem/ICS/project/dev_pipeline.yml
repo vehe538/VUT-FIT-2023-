@@ -1,0 +1,58 @@
+trigger:
+  branches:
+    include:
+      - dev
+
+pool:
+  vmImage: 'windows-latest'
+
+stages:
+
+  - stage:
+    displayName: Build .NET application
+    jobs:
+      - job:
+        displayName: build job
+        steps:
+          - task: UseDotNet@2
+            displayName: Use .NET9 to build
+            inputs:
+              version: '9.0.x'
+              includePreviewVersions: true
+
+          - task: UseDotNet@2
+            displayName: Use .NET 9 SDK
+            inputs:
+              version: '9.0.x'
+              includePreviewVersions: true
+
+          - script: dotnet workload install maui
+            displayName: Install MAUI workload
+
+          - task: DotNetCoreCLI@2
+            displayName: Restore NuGet Packages
+            inputs:
+              command: restore
+              projects: '**/*.csproj'
+
+          - task: DotNetCoreCLI@2
+            displayName: Building Visual studio solution
+            inputs:
+              command: 'build'
+              projects: '**/*.csproj'
+              arguments: '--configuration debug'
+ 
+  - stage: 
+    displayName: Run unit tests
+    jobs:
+      - job:
+        displayName: unit tests job
+        steps:
+          - task: DotNetCoreCLI@2
+            displayName: Run Visual studio tests
+            inputs:
+              command: test
+              projects: '**/*Test*/*.csproj'
+              arguments: '--configuration debug'
+
+    
