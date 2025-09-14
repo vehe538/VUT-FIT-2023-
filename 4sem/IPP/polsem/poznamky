@@ -1,0 +1,106 @@
+1 PREADNASKA:
+- syntax:
+	- definuje strukturu programu - to akym sposobom je dovolene radit za seba jednotlive jazykove konstrukcie
+	- je mozne ju definovat slovne, pomocou syntaktickych grafov, BNF, EBNF alebo formalnych gramatik
+- semantika:
+	- definicia vyznamu jednotlivych jazykovych konstrukcii, sposobbu ich vyhodnotenia a spracovania
+	- staticka: popisuje vlastnosti programu, ktore je mozne skumat uz pocas preklady/analyzy - napr. typova kompatibilita, existencia premennej
+	- dynamicka: popisuje vlastnosti programu, ktore je mozne skumat az za behu programu - velkost vysledku vyrazu
+- vazba: spojenie entity s jej vlastnostou
+		- moze vznikat pocas:
+			- pocas definicie jazyka
+			- pocas implementacie programu
+			- pocas prekladu programu
+			- pocas spojovania prelozenych modulov
+			- pocas spustenia programu
+			- pocas behu programu
+
+		- staticka: su raz vytvorene a uz nemenne
+		- dynamicka: s uvytvorene a pocas behu programu sa mozu menit
+
+abstrakcia: schopnost objektu zjednodusit niektore aspekty informacii alebo vlastnosti objektov, s ktorymi pracuje
+
+- deklaracia vs. definicia:
+	- deklaracia: 
+		- uplne vymedzuje atributy nejakej entity bez urcenia hodnoty
+		- svedci cisto o existencii danej entity
+		- prvotny zapis premennej alebo funkcie
+		- implicitna: preklada rozhoduje ci bola dana entita deklarovana, popripade vypise error
+		- explicitna: programator jasne deklaruje danu entitu, co prispieva k citatelnosti kodu
+		
+	- definicia: uplne vymedzuje atrubuty nejakej entity, pricom pri premennej urcuje sposob alokacie pamete a pri
+		     funckiach telo funkcie
+
+- programovaci jazyk: subor pravidiel so specifickou syntaktickou strukturou a vymedzenou semantikou
+- programovanie: cinnost prevadzania myslienky, algoritmu alebo postupu na radu elementarnych operacii nejakeho stroja
+- programatror: ten co vykonava programovanie
+- program: zapis v programovacom jazyku, ktory je abstrakciou reality
+
+2. PREDNASKA:
+- Model OOP:
+	- pravidla pre tvorbu OO systemu
+	- popisuje ako konstruovat objekt, prepajat viacere objekty, vytvarat modely vypoctu
+	- staticke:
+		- staticky typovane
+		- urcene na pisanie OO zdrojovych textov
+		- vyuzivaju staticke VMT
+	- dynamicke:
+		- vyuzivaju vacsinou VM alebo su priamo interpretovane
+		- obsahuju dynamicke datove type (su netypovane)
+		- jednoduche, reflexivne
+
+- model vypoctu:
+	- v cisto OOJ obsahuje aspon 2 operacie:
+	- priradenie - pomenovanie objektu alebo jeho priradenie do premennej, mozne pouzit refernciu objektu alebo jeho ukazatel
+	- zaslanie spravy:
+		- sklada sa z mena prijemcu, selektorov a argumentov
+		- reakcia je realizovana zvycajne rovnako pomenovanou metodou
+		- objekt hlada atributy u seba alebo u rodicovskeho objektu , neuspech == error
+	
+- objekt:
+	- autonomna, vypocetne uplna entita
+	- obsahuje identitu, ktora je nezavisla na jeho atributoch a ktora sluzi na rozlisenie od inych objektov
+	- zakladna jednotko modularity a struktury OO programu
+	
+- zapuzdrenie:
+	- uzavrenost pred ostatnymi objektami 
+	- pristup je mozny len cez rozhranie
+	- kom. cez verejne rozhranie:
+		- zasielanie sprav musi obsahovat prijemcu, selektory, argumenty
+		- reakcia na spravy: invokacia, chybova hlaska
+		
+- mnohotvarnost/polymorfizmus:
+	- ta ista sprava moze byt zaslana viacerym objektom s roznymi reakciami
+	- rozne reakcie zapricinuje zapuzdrenie - nie je zname ako je dana metoda implementovana pri kazdom objekte
+
+- dedicnost:
+	- sposob implementacie uz existujuceho spravania
+	- nove objekty preberu existujuce spravanie a dolnia ho o vlastnu funkcionalitu bez toho, aby ho museli znova implementovat
+	
+- vytvaranie noveho objektu:
+	1. vytvorenie noveho objektu + uprava poloziek
+	2. klonovanie prototypu + uprava poloziek
+	3. vytvorenie pomocou triedy + naplnenie preddefinovanych atributov
+
+- trieda:
+	- sablona pre vytvaranie objektov (instancii triedy)
+	- entita, ktora obsahuje zoznam atributov, metadata a implementaciu niektorych metod
+	
+- instanciacia:
+	- proces vytvarania instancie triedy + volanie konstruktora
+- modifikator viditelnosti:
+	- urcuje ci su polozky pristupne cez verejny protokol
+	
+typy, podtypy, nadtypy:
+	- ak hovorime o triede ako o type, v pripade predka sa jedna o nadtype, v pripade potomka o podtype
+	- pristupy k typo:
+		- cisto objektovy pristup
+		- hybridne objektovy pristup
+
+tabulka virtualnych metod:
+	- saza polymorfnych metod dostupnych pre instanciu
+
+typovy system OOJ:
+	- beztypove: teoreticke jazyky a formalizmy, v ktorych nema zmysel urcovat typ
+	- netypovane: premenna nema urceny v zdrojovom kode typ, vyhodnocuje ho az prekladac alebo interpreter
+	- typovane: premenna musi mat v zdrojovom kode urceny typ
