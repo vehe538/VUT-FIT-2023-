@@ -1,0 +1,18 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1764108990" />
+    <testcase name="test_reset" classname="cpu" file="&lt;makefun-gen-1&gt;" lineno="1" time="0.002038240432739258" sim_time_ns="51.000001" ratio_time="25021.58243002737" />
+    <testcase name="test_init" classname="cpu" file="&lt;makefun-gen-3&gt;" lineno="1" time="0.005414724349975586" sim_time_ns="110.000001" ratio_time="20314.977068130156" />
+    <testcase name="test_increment" classname="cpu" file="&lt;makefun-gen-5&gt;" lineno="1" time="0.00873708724975586" sim_time_ns="270.000001" ratio_time="30902.74748115221" />
+    <testcase name="test_decrement" classname="cpu" file="&lt;makefun-gen-7&gt;" lineno="1" time="0.008695840835571289" sim_time_ns="270.000001" ratio_time="31049.326465996874" />
+    <testcase name="test_move" classname="cpu" file="&lt;makefun-gen-9&gt;" lineno="1" time="0.007079124450683594" sim_time_ns="210.000001" ratio_time="29664.685578415196" />
+    <testcase name="test_print" classname="cpu" file="&lt;makefun-gen-11&gt;" lineno="1" time="0.023408174514770508" sim_time_ns="1230.0000010000003" ratio_time="52545.74636838396" />
+    <testcase name="test_input" classname="cpu" file="&lt;makefun-gen-13&gt;" lineno="1" time="0.05313754081726074" sim_time_ns="2480.0000009999994" ratio_time="46671.33561051846" />
+    <testcase name="test_while_loop" classname="cpu" file="&lt;makefun-gen-15&gt;" lineno="1" time="0.027558088302612305" sim_time_ns="1360.0000010000003" ratio_time="49350.302751990326" />
+    <testcase name="test_do_loop" classname="cpu" file="&lt;makefun-gen-17&gt;" lineno="1" time="0.08838629722595215" sim_time_ns="5055.000000999999" ratio_time="57192.12320974728">
+      <failure />
+    </testcase>
+    <testcase name="test_fastinit" classname="cpu" file="&lt;makefun-gen-19&gt;" lineno="1" time="0.006485700607299805" sim_time_ns="170.00000100000034" ratio_time="26211.509178925317" />
+    <testcase name="test_login_msik" classname="cpu" file="&lt;makefun-gen-21&gt;" lineno="1" time="0.4960947036743164" sim_time_ns="23710.000000999997" ratio_time="47793.29395253026" />
+  </testsuite>
+</testsuites>

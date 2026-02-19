@@ -1,0 +1,4 @@
+v 4
+file "/home/msik/skola/inp/projekt1/zadani/test/" "../src/cpu.vhd" "690a6f036827549dc70b46e8978f0640ac1e9967" "20251125221630.077":
+  entity cpu at 6( 221) + 0 on 11;
+  architecture behavioral of cpu at 49( 2340) + 0 on 12;

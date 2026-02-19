@@ -1,0 +1,17 @@
+vykonnost v MIPS = frekvencia v Hz / CPI * 10^-6
+
+SRAM:
+DRAM:
+RVP:
+
+
+tri typy konfliktov:
+
+1. Strukturalne: obvodova struktura neumoznuje sucasne prevedenie urcitych akcii
+		 - fix: rozdelenie pamate na pamat dat a pamat instrukcii
+
+2. Datove:	ked su na nieco potrebne data z predoslej nedokoncenej instrukcie
+		- fix: bypassing - poskytovanie medzivysledkov
+
+3. Riadiace:	skokova instrukcia zmeni obsah napr. PC
+		- fix: oneskorenie skoku
