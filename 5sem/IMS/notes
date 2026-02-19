@@ -1,0 +1,417 @@
+ZAKLADNE DEFINICIE:
+
+system: 
+	subor elementarnych casti ( prvkov systemu ), ktore maju medzi sebou urcite vazby
+	formalne: S = (u,r), kde u je mnozina prvkov a r je relacie, ktora popisuje ako su prvky prepojene
+	prvok z mnoziny u, U = (x,y), kde x je mnozina vstupnych param. a y je mnozina vystupnych parametrov
+	delenie: realne & nerealne
+
+model: 
+	napodobenina vzoroveho systemu inym systemom modelu, reprezentacia znalosti
+
+modelovanie (princip):
+	vytvaranie modelov systemov na zaklade znalosti
+
+simulacia:
+	ziskavanie novych znalosti o systeme experimentovanim s jeho modelom
+	cielom je ziskanie novych informacii o spravani systemu v zavislosti na vstupnych velicinach
+	Realita -> Znalosti -> Abstraktny model -> Simulacny model
+
+typy simulacie:
+	podla popisu modelu:
+		- spojita
+		- diskretna
+		- kombinovana kvalitativna
+		- kvantitativna
+	podla simulatora:
+		- na analogovom/cislicovom pocitaci
+		- Real-Time simulacia
+		- paralelna a distribuovana simulacia	
+
+Simulacny model:
+ - je to system, ktory vznikol 	zobrazenim realneho systemu do podoby spustitelneho modelu
+ - vlastnost spustitelnosti zarucuje, ze existuje aparat, ktory je schopny interpretovat model tak, aby vykazoval potrebne spravanie
+validacia/verifikacia:
+	validacia - kontroluje ze system bol v nejakych medziach overeny - kontroluje sa jeho platnost
+		  - ak su medze prekrocene, validita nie je zarucena
+		  - overovanie validity je proces, v ktorom sa snazime dokazat ze pracujeme s adekvatnym modelom nejakeho systemu
+
+	verifikacia - overovanie, ci abstraktny model koresponduje simulacnemu modelu, a teda ci plati medzi nimi izomorfny vztah 1:1
+ 	
+
+typy systemov:
+ - deterministicke - vsetky prvky su deterministicke, nenastava nahodny jav
+ - nedetermisniticke - aspon jeden prvok je nedeterministicky, moze nastat nahodny jav
+ - stochasticke - nahodne javy su vyjadrene pravdepodobnostami
+ - spojite - prvky maju spojite spravanie
+ - diskretne - prvky maju diskretne spravanie
+ - kombinovanie - system ma aj spojite aj diskretne prvky
+
+typy modelov:
+ - konceptualna - forma textu alebo obrazku
+ - deklarativne - popisuje prechody medzi stavmi systemu (petriho siet, KA)
+ - funkcionalne - system je popisany funkciami s premennymi
+ - contraint - forma matematickych rovnic (diferencialnych, diferencnych, neorientovany graf)
+ - spacial - priestorove modely, rozdeluju system na podsystemy
+ - multimodely - kombinacie roznych elemetarnych druhov modelov
+
+Kombinovany/hybridny dynamicky system + jeho spravanie (s prikladom):
+
+ - niektore prvky su popisane spojite a niektore diskretne
+ - priklad padajuca lopta - pad ma spojity priebeh, kontakt so zemou (odrazenie) je stavova udalost
+
+problemy simulacnych metod:
+
+ - validita - uplatnenie zisteni z experimentov na neplatnom modely moze mat katastrofalne nasledky
+ - slaby vypocetny vykon pocitacov - komplexne netrivialne modely moze byt pre pocitace prilis narocne na vypocet
+ - mala presnost matematickych metod - pri modelovani za pouzitia analytickeho riesenia je potrebne zvolit metodu z vyhovujucou presnostou
+ - casova narocnost - pre ziskanie relevantnych znalosti o systeme je potrebne spustit simulaciu viackrat s roznymi parametrami, co moze zabrat vela casu
+ - narocnost vytvarania modelu - moze sa stat ze vytvaranie modelu nejakeho systemu je podobne narocne ako vytvorit samotny system, napr. model procesoru
+
+Abstraktny model:
+ - zjednodusena forma modelu
+ - moze mat formu petriho siete, grafu, automatu, rovnice,...
+ - so simulacnym modelom musi mat izomorfny vztah
+
+Analyticke riesenie:
+ - spravanie systemu je popisane matematickymi vztahmi a na riesenie sa pouzivaju matematicke metody
+ - premennymi v matematickych zapisoch su parametre, za ktore ked dosadime konkr. hodnoty, najdeme riesenie
+ - vysledky su oproti simulacii presnejsie a vypocty menej casovo narocne
+
+Kalendar udalosti:
+ - prioritna fronta, ktora uchovava zaznamy o udalostiach v buducnosti
+ - kazda udalost obsahuje:
+	- aktivacny cas
+	- prioritu
+	- odkaz na funkciu - popis udalosti
+
+Markovova vlastnost:
+ - nasledujuci stav procesu zavisi iba na aktualnom stave
+
+Markovsky proces:
+ - nahodny proces so spojitych casom splnujuci markovovu vlastnost
+
+Markovsky retazec:	
+ - nahodny diskretny proces s diskretnym casom splnujuci markovovu vlasnost
+
+CA:
+ - diskretny priestorovy model, ktoreho komponentami su:
+	 - pole rovnakych buniek	
+	 - konecna mnozina stavov bunky
+	 - okolie bunky  - definuje pocet a poziciu okolitych buniek, s ktorymi vybrana bunka pracuje
+	 - pravidla - popisuje spravanie bunky, funkcia urcujuca nasledujuci stav bunky a ktorej vstupmi su aktualny stav bunky a jej okolia
+SHO:
+ - system, ktory obsahuje zariadenia, ktore poskytuju obsluhu transakciam
+ - obsahuje:
+	- transakcie a popis ich prichodu
+ 	- obsluzne linky a popis obsluhy
+	- rozne typy front
+
+Modelovy cas:
+ - casova os modelu
+ - premenna, ktorej hodnoty su z casovej hodnoty
+ - modeluje realny cas nejakeho systemu
+ - nemusi byt synchronny s realnym casom
+ 	- diskretny model: casovu mnozinu tvoria diskretne body znaciace len momenty, ktore su pre model relevantne, napr. cas zaciatku, nejakej udalosti, konca,...
+	- spojity model: casova mnozina je interval, ktorym pocas simulacie prechadzame po krokoch vhodnej velkosti a pre kazdy krok hladame riesenie
+	- kombinovany: spojity casovy priebeh obsahuje diskretne udalosti, ktore sa snazime zachytit napr. stavovymi podmienkami a zmensovanim kroku
+
+
+Casova mnozina:
+ - mnozina vsetkych casovych okamihov, ktore definuju hodnoty vstupnych, stavovych a vystupnych premennych prvkov systemu
+
+Euler za 5b:
+ - zakladna jednokrokova numericka metoda pouzivana na riesenie ODR 1. radu
+ - odvodenie:
+	1. nech y'(t) = f(t, y(t)) ; y(t0) = y0
+	2. taylorov rozvoj: y(t+h) = y(t) + h*y'(t) + h^2/2*y''(t) + O(h^3)
+	3. dosadenie za y'(t): y(t+h) = y(t) + h*f(t, y(t)) + h^2/2*y''(t) + O(h^3)
+	4. linearna cast: y(t+h) = y(t) + h*f(t, y(t))
+
+////////////////////////////////////////////////////
+Calendar + euler
+
+#define PRINTSTEP 0.1
+
+double y[2] = {1.0, 1.0};
+double yin[2];
+double step = 0.1;
+double time = 0;
+
+viod update() {
+
+	yin[0] = ...;
+	yin[1] = ...;
+}
+
+
+void euler(double h) {
+
+	update();
+	for (int i = 0; i < 2; i ++) {
+		y[i] += h * yin[i];
+	}
+	time += h;
+}
+
+void print() {
+
+	printf(picovinky);
+	cal_insert(print, 0 , time + PRINTSTEP);
+}
+
+int main() {
+
+	cal_init();
+	cal_insert(END, 100, -20);
+	cal_insert(print, 0 , time);
+
+	struct ev_notice e;
+	while (!cal_empty()) {
+		e = cal_get_first();
+		cal_pop();
+
+		while (time < e.atime) {
+			if (time + h > e.atime) {
+				step = e.atime - time;	
+			}
+			euler(step);
+		}
+		e.evptr();
+	}
+	return 0;
+
+}
+
+
+//////////////////////////////////////////////////////////////////////
+
+cal_insert(ev ptr, double time, int priority) {
+	
+	oldsize = calendar_size;
+	if (oldsize + 1 > (sizeof(calendar_data) / sizeof(calendar_data[0]))) {
+		error("calendar_overflow");
+	}
+	
+	int i = 0;
+	while (i < oldsize && calendar_data[i].atime < time) {
+		i++;
+	}
+
+	while (i < oldsize && calendar_data[i].atime == time && calendar_data[i].priority >= priority) {
+		i++;
+	}
+	
+	if (i < oldsize) memmove(calendar_data + i + 1; calendar_data + i, sizeof((struct ev_notice) * (oldsize - i)));
+
+	calendar_size++;
+	calendar_data[i].atime = time;
+	calendar_data[i].priority = priority;
+	calendar_data[i].evptr = ptr;
+}
+
+
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+
+MonteCarlo:
+
+#define steps 500;
+ // err = 1/sqrt(steps)
+
+void mc(double a, double b) {
+
+	int sum = 0;
+	for (int i = 0; i < steps; i++) {
+	
+		double x = uniform(a,b)
+		sum += x;
+	}
+
+	double avg = sum / steps;
+	return avg * (b-a)
+}
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+Euler + stateEvent + micek
+
+double y[2] = {1.0, 0.0};
+double yin[2];
+double time = 0;
+double normalstep = 0.1;
+double smallstep = 0.01;
+double g = 9.81;
+
+
+void update() {
+
+	yin[0] = y[1];
+	yin[1] = -g;
+}
+
+
+void euler(double h) {
+
+	update(); 
+	for (int i = 0; i < N; i++) {
+		y[i] += h * yin[i];
+	}
+	time += h;
+}
+
+
+void StateEvent() {
+
+	y[1] = -y[1] * 0.8;
+}
+
+int main() {
+
+
+	double end = 20.0;
+	double step = normalstep;
+
+	while (time < end) {
+		double time_backup = time;
+		double y_backup[2] = {};
+		for (int i = 0; i < 2; i++) { y_backup[i] = y[i]; }
+
+		bool cond_before = (y[0] >= 0.0);
+		euler(step);
+		bool cond_after = (y[0] >= 0.0);
+
+		if (cond_before != cond_after) {
+			if (step <= smallstep) {
+				if (!cond_after) StateEvent();
+				step = normalstep;
+			} else {
+				time = time_backup;
+				for (int i = 0; i < 2; i++) { y[i] = y_backup[i] };
+				step /= 2;
+				if (step < smallstep) step = smallstep;
+			}
+		}
+		printf("%.4f %.4f time: .4f%", y[0], y[1], time);
+
+	}
+	return 0
+
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+
+Kalendar pseudo:
+Init casu, kalendara, modelu
+
+while (!kalendar_empty()) {
+	zaznam = kalendar_pop()
+	if (zaznam.atime > T_END):
+		end
+	else:
+		cas = zaznam.atime
+		zaznam.popis()	
+}
+
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+RK2:
+
+#define N 2
+
+void Dynamic(double t, double st[], unsigned N, double in[]) {
+
+	in[0] = ...;
+	in[1] = ...;
+}
+
+RK_step(double t, double state[], unsigned N, double stepsize) {
+	
+	double k1[N];
+	double k2[N];
+	double ystart[N];
+
+	for (int i = 0; i < N; i++) {
+		ystart[i] = state[i];
+	}
+
+	// vypocet k1
+	Dynamic(t, state, N, k1);
+	// vypocet y(t) pre k2
+	for (int i = 0; i < N; i++) {
+		state[i] = ystart[i] + k1[i] * 0.75 * stepsize;
+	}
+	//vypocet k2
+	Dynamic(t+ 0.75* stepsize, state, N, k2);
+	//vypocet y(t+h)
+	for (int i = 0; i < N; i++) {
+		state[i] = ystart[i] + ((1.0/3.0)*k1[i] + (2.0/3.0)*k2[i]) * stepsize;
+	}
+	
+}
+
+void SimRun(double t1, double t2) {
+
+	double time = t1;
+	double y[N] = {1.0, 1.0};
+	double step = 0.1;
+	
+	while (time < t2) {
+		if (time + step > t2) {
+			RK_step(time, y, N, t2-time);
+		} else {
+			RK_step(time, y, N, step);
+			time += step;
+		}
+		printf("%.4f %.4f, time: %.4f \n\n", y[0], y[1], time);
+	}
+
+
+}
+
+int main() {
+
+	SimRun(0.0, 30.0);
+	return 0;
+
+}
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+
+class Facility:
+
+	Queue q1, q2 // q1-cakajuce, q2-pozastavene
+	Process *current
+	int priority = 0;
+	
+	void Seize(Process *new, int prio) {
+		if (current == None) {
+			current = new;
+			priority = prio
+		} else if (prio > priority) {
+			q2.insert(current);
+			current->passivate();
+			
+			current = new;
+			priority = prio
+		} else {
+			q1.insert(new);
+			new->passivate
+		}
+	}
+
+	void Release() {
+		if (q2.len > 0) {
+			current = q2.dequeue;
+			current->activate
+		} else {
+			current = q1.dequeue;
+			current->activate
+		}
+
+
+	}
