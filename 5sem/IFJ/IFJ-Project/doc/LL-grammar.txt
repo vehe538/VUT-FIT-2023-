@@ -1,0 +1,61 @@
+(1)  Program → Prolog ClassDefinition EOF
+
+(2)  Prolog → import EolRuleNext "ifj25" EolRuleNext for EolRuleNext Ifj EolRule
+
+(3)  ClassDefinition → class Program { EolRule FunctionList }
+
+(4)  FunctionList → FunctionDef FunctionList
+(5)  FunctionList → ε
+
+(6)  FunctionDef → static FunctionHeader Block EolRule
+
+(7)  FunctionHeader → identifier FunctionHeaderTail
+(8)  FunctionHeaderTail → ( ParameterList )
+(9)  FunctionHeaderTail → = EolRuleNext ( identifier )
+(10) FunctionHeaderTail → ε
+
+(11) ParameterList → identifier ParameterListTail
+(12) ParameterList → ε
+(13) ParameterListTail → , EolRuleNext identifier ParameterListTail
+(14) ParameterListTail → ε
+
+(15) Block → { EolRule StatementList }
+
+(16) StatementList → Statement StatementList
+(17) StatementList → ε
+
+(18) Statement → var identifier EolRule
+(19) Statement → if ( Expression ) Block IfElse
+(20) Statement → while ( Expression ) Block EolRule
+(21) Statement → return Expression EolRule
+(22) Statement → Block 
+(23) Statement → identifier StatementTail
+(24) Statement → global_identifier = EolRuleNext Expression EolRule
+(25) Statement → Ifj . EolRuleNext identifier ( ArgumentList ) EolRule
+
+(26) StatementTail → =  EolRuleNext Expression EolRule
+(27) StatementTail → ( ArgumentList ) EolRule
+
+(28) ArgumentList → Term ArgumentListTail
+(29) ArgumentList → ε
+(30) ArgumentListTail → , EolRuleNext Term ArgumentListTail
+(31) ArgumentListTail → ε
+
+(32) Term → identifier
+(33) Term → global_identifier
+(34) Term → Literal
+
+(35) Literal → int_literal
+(36) Literal → float_literal
+(37) Literal → string_literal
+(38) Literal → hex_literal
+(39) Literal → null
+
+(40) EolRule → EOL EolRuleNext
+(41) EolRuleNext → EOL EolRuleNext
+(42) EolRuleNext → ε
+
+(43) IfElse → else Block EolRule
+(44) IfElse → EolRule
+
+(45) Expression → /* Precedenčná analýza - vrátane Ifj.func(), id(), gettery */

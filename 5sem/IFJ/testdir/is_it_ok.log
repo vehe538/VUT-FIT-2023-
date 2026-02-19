@@ -1,0 +1,29 @@
+Archive:  xmesikj00.zip
+  inflating: ast.c                   
+  inflating: ast.h                   
+  inflating: compiler.c              
+  inflating: dokumentace.pdf         
+  inflating: error.c                 
+  inflating: error_codes.h           
+  inflating: error.h                 
+  inflating: expr_stack.c            
+  inflating: expr_stack.h            
+  inflating: generator.c             
+  inflating: generator.h             
+  inflating: Makefile                
+  inflating: parser.c                
+  inflating: parser.h                
+  inflating: precedence_table.c      
+  inflating: precedence_table.h      
+  inflating: psa.c                   
+  inflating: psa.h                   
+  inflating: rozdeleni               
+ extracting: rozsireni               
+  inflating: scanner.c               
+  inflating: scanner.h               
+  inflating: semantics.c             
+  inflating: semantics.h             
+  inflating: simple_program.wren     
+  inflating: symtable.c              
+  inflating: symtable.h              
+gcc -Wall -Wextra -std=c99 -g -o compiler compiler.c parser.c scanner.c symtable.c error.c ast.c psa.c precedence_table.c expr_stack.c semantics.c generator.c -lm

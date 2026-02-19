@@ -1,0 +1,36 @@
+Bezkontextova gramatika:
+	- G = (N,T,P,S)
+	- ...
+	- P - konecna mnozina pravidiel tvaru A -> x, kde A lezi na T a x lezi na (N u T)^*
+	- S - pociatocny neterminal
+
+jazyk generovany BKG:
+	L(G) = {w: w lezi na T^* | S =>^* w}
+
+derivacny krok:
+	- Nech G je BKG. Nech w,v lezia na (N u T)^* a p = A -> x, pricom p lezi na P. vAw priamo derivuje vwm za pouzitia p; zapis: wAv => wxv [p]
+
+sekvencia derivacnych krokov:
+	- Nech w lezi na (N u T)^*. G prevedie nula derivacnych krokov z w do w: w =>^0 w
+	- Nech w0,...,wn lezia na ( N u T)^* kde n >= 1 a wi-1 => wi [pi], pricom pi lezi na P pre vsetky i = 1,...,n , potom
+	  w0 => w1 [p1] => ... => wn[pn]. G teda prevedie n derivacnych krokov z w0 do wn; zapis: w0 =>^n wn [p1,...,pn]
+---
+Zasobnikovy automat:
+
+	M = (Q, sigma, gamma, P, s, S, F)
+	- Q - konecna neprazdna mnozina stavov
+	- sigma - abeceda	
+	- gamma - zasobnikova abeceda
+	- P - konecna mnozina pravidiel tvaru Apa -> wq, kde p,q su stavy, A lezi na gamma, w lezi na gamma^*, a lezi na sigma^* zjed. {eps.}
+	- s - pociatocny stav, lezi na Q
+	- S - pociatocny symbol zasobniku, lezi na gamma
+	- F - konecna mnozina koncovych stavov
+
+Pumping-lemma:
+ - L lezi na L3 => (existuje k >= 1 : pre vsetky z leziace na sigma^* : z lezi na L a |z| >= k => existuje u,v,w leziace na sigma^* : z = uvw az. v != eps. az. |uv| <= k az.
+		   pre vsetky m >= 0 : uv^mw lezi na L)
+
+- Nech M je ZA. Konfiguraciou M je retazec Chii leziaci gamma^* * Q * sigma^*
+
+DZA:
+	- Ak Apa -> wg je pravidlo z P, potom P\{Apa -> wg} neobsahuje pravidlo take, v ktorom sa na lavej strane nachadza Apa ani Ap

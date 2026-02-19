@@ -1,0 +1,2 @@
+=== IFJ25 Compiler Starting ===
+Error 6: detected incompatiple types in expression

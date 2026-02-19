@@ -1,0 +1,237 @@
+================================================================================
+PLÁN IMPLEMENTÁCIE SÉMANTICKÝCH KONTROL PRE IFJ25
+================================================================================
+
+1. ANALÝZA EXISTUJÚCEJ IMPLEMENTÁCIE SYMTABLE
+--------------------------------------------------------------------------------
+Silné stránky:
+- AVL strom pre efektívne vyhľadávanie O(log n)
+- Zásobník pre správu scope
+- Podpora preťažovania funkcií cez kľúče "meno_počet"
+- Rozlíšenie funkcie/getter/setter cez function_type_t
+
+Problémy na opravu:
+- get_symbol_from_upper_scopes() modifikuje zásobník (nebezpečné!)
+- Chýba podpora pre typy premenných
+- Chýba rozlíšenie lokálnych/globálnych premenných
+
+2. POTREBNÉ ÚPRAVY SYMTABLE
+--------------------------------------------------------------------------------
+2.1 Pridať do symbol_t:
+    typedef enum {
+        VAR_LOCAL,
+        VAR_GLOBAL,
+        VAR_PARAM
+    } var_scope_t;
+    
+    typedef enum {
+        TYPE_UNKNOWN,
+        TYPE_NUM,
+        TYPE_STRING,
+        TYPE_NULL,
+        TYPE_BOOL,      // pre rozšírenie
+        TYPE_DYNAMIC    // môže byť hocičo
+    } var_type_t;
+    
+    // Pridať do struct symbol:
+    var_scope_t var_scope;  // pre premenné
+    var_type_t var_type;    // aktuálny/posledný známy typ
+    bool initialized;       // či bola premenná inicializovaná
+
+2.2 Opraviť get_symbol_from_upper_scopes():
+    symbol_t *get_symbol_all_scopes(symtable_stack_t *stack, char *key) {
+        stack_element_t *current = stack->top;
+        while (current != NULL) {
+            symbol_t *found = get_symbol_from_symtable(*(current->symbol_table), key);
+            if (found) return found;
+            current = current->next;
+        }
+        return NULL;
+    }
+
+2.3 Pridať pomocnú funkciu pre aktuálny scope:
+    symbol_t *get_symbol_current_scope(symtable_stack_t *stack, char *key) {
+        if (!stack || !stack->top) return NULL;
+        return get_symbol_from_symtable(*(stack->top->symbol_table), key);
+    }
+
+3. INTEGRÁCIA S PARSEROM - FÁZOVÝ PRÍSTUP
+--------------------------------------------------------------------------------
+
+FÁZA 1: Inicializácia (začiatok parsovania)
+--------------------------------------------
+symtable_stack_t *stack = init_stack();
+symbol_t **global_table = create_new_symtable();
+push_to_stack(stack, global_table);
+
+// Pridať vestavené funkcie do globálnej tabuľky
+insert_to_symtable(global_table, "write", true, 1, T_FUNC, true);
+insert_to_symtable(global_table, "read_str", true, 0, T_FUNC, true);
+insert_to_symtable(global_table, "read_num", true, 0, T_FUNC, true);
+// ... ďalšie Ifj.* funkcie
+
+FÁZA 2: Spracovanie definícií funkcií
+--------------------------------------
+Pri nájdení: static func_name(param1, param2) {
+
+Kód:
+    char *key = create_key("func_name", 2, true);
+    symbol_t *existing = get_symbol_from_symtable(*global_table, key);
+    
+    if (existing != NULL) {
+        if (existing->declared) {
+            error(4, "Redefinícia funkcie");
+        }
+        existing->declared = true;  // Označiť ako definovanú
+    } else {
+        insert_to_symtable(global_table, "func_name", true, 2, T_FUNC, true);
+    }
+    
+    // Vytvoriť nový scope pre telo funkcie
+    symbol_t **func_scope = create_new_symtable();
+    push_to_stack(stack, func_scope);
+    
+    // Pridať parametre ako lokálne premenné
+    insert_to_symtable(func_scope, "param1", false, 0, T_UNKNOWN, true);
+    insert_to_symtable(func_scope, "param2", false, 0, T_UNKNOWN, true);
+    free(key);
+
+FÁZA 3: Spracovanie premenných
+-------------------------------
+3.1 Lokálna premenná (var x):
+    if (!starts_with("__", "x")) {
+        symbol_t *existing = get_symbol_current_scope(stack, "x");
+        if (existing != NULL) {
+            error(4, "Redefinícia premennej v rovnakom scope");
+        }
+        insert_to_symtable(stack->top->symbol_table, "x", false, 0, T_UNKNOWN, false);
+    }
+
+3.2 Globálna premenná (__x):
+    if (starts_with("__", "__x")) {
+        symbol_t *existing = get_symbol_from_symtable(*global_table, "__x");
+        if (existing == NULL) {
+            insert_to_symtable(global_table, "__x", false, 0, T_UNKNOWN, true);
+        }
+    }
+
+FÁZA 4: Kontrola použitia
+-------------------------
+4.1 Použitie premennej:
+    symbol_t *var = get_symbol_all_scopes(stack, "x");
+    if (var == NULL) {
+        if (!starts_with("__", "x")) {
+            error(3, "Nedefinovaná lokálna premenná");
+        }
+        // Pre globálne automaticky vytvoriť s hodnotou null
+    }
+
+4.2 Volanie funkcie:
+    char *key = create_key("foo", arg_count, true);
+    symbol_t *func = get_symbol_from_symtable(*global_table, key);
+    
+    if (func == NULL) {
+        // Skúsiť getter (0 parametrov)
+        if (arg_count == 0) {
+            char *getter_key = create_key("foo", 0, true);
+            func = get_symbol_from_symtable(*global_table, getter_key);
+            free(getter_key);
+        }
+        if (func == NULL) {
+            error(3, "Nedefinovaná funkcia alebo nesprávny počet parametrov");
+        }
+    }
+    free(key);
+
+FÁZA 5: Typové kontroly
+-----------------------
+5.1 Pri literáloch (statická):
+    Pri výraze: "text" + 5
+    if (left_type == TYPE_STRING && right_type == TYPE_NUM) {
+        error(6, "Nekompatibilné typy v operácii");
+    }
+
+5.2 Generovanie runtime kontrol:
+    Pri výraze: x + y  (kde x,y sú premenné)
+    // Vygenerovať IFJcode25:
+    // TYPE GF@tmp_type1 LF@x
+    // TYPE GF@tmp_type2 LF@y
+    // JUMPIFNEQ error_label GF@tmp_type1 GF@tmp_type2
+
+FÁZA 6: Scope management
+------------------------
+6.1 Vstup do bloku ({):
+    symbol_t **new_scope = create_new_symtable();
+    push_to_stack(stack, new_scope);
+
+6.2 Výstup z bloku (}):
+    symbol_t **old_scope = pop_from_stack(stack);
+    delete_symtable(old_scope);
+    free(old_scope);
+
+FÁZA 7: Finálne kontroly
+------------------------
+Po spracovaní celého programu:
+    // Kontrola existencie main()
+    char *main_key = create_key("main", 0, true);
+    symbol_t *main_func = get_symbol_from_symtable(*global_table, main_key);
+    if (main_func == NULL || !main_func->declared) {
+        error(3, "Chýba funkcia main()");
+    }
+    free(main_key);
+    
+    // Kontrola všetkých volaných funkcií
+    // (mali by byť označené ako declared=true)
+
+4. MAPOVANIE NA CHYBOVÉ KÓDY
+--------------------------------------------------------------------------------
+Chyba 3: - Nedefinovaná funkcia/premenná
+         - Chýbajúca main()
+         
+Chyba 4: - Redefinícia funkcie s rovnakou signatúrou
+         - Redefinícia premennej v rovnakom scope
+         
+Chyba 5: - Nesprávny počet parametrov pri volaní
+         - Nesprávny typ parametra vestavěnej funkcie (literál)
+         
+Chyba 6: - Nekompatibilné typy v operácii (literály)
+
+Chyba 10: - Ostatné sémantické chyby
+
+Chyba 25: - Runtime: zlý typ parametra vestavěnej funkcie
+Chyba 26: - Runtime: nekompatibilné typy v operácii
+
+5. TESTOVANIE
+--------------------------------------------------------------------------------
+Test 1: Redefinícia funkcie
+    static foo(x) { }
+    static foo(x) { }  // Chyba 4
+
+Test 2: Preťažovanie
+    static foo(x) { }
+    static foo(x, y) { }  // OK
+
+Test 3: Nedefinovaná premenná
+    var x = y;  // Chyba 3
+
+Test 4: Shadowing
+    var x = 1;
+    {
+        var x = 2;  // OK
+    }
+
+Test 5: Globálne premenné
+    __global = 5;  // OK bez var
+    x = __undefined;  // OK, hodnota null
+
+6. ČASOVÝ HARMONOGRAM
+--------------------------------------------------------------------------------
+1. Úprava symtable.c/h - 2 hodiny
+2. Integrácia s parserom - 4 hodiny  
+3. Implementácia kontrol - 3 hodiny
+4. Testovanie - 2 hodiny
+5. Dokumentácia - 1 hodina
+
+CELKOM: ~12 hodín práce
+
+================================================================================
