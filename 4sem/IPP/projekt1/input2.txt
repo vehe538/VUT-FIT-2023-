@@ -1,6 +1,0 @@
-            class A : B {}
-            class B : C {}
-            class C : A {}
-            class Main : Object {
-                run [|]
-            }

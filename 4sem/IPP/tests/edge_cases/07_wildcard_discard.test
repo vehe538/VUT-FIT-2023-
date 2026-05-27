@@ -1,0 +1,16 @@
++++ EDGE_CASES
+!C! 0
+!I! 0
+>>> 1
+
+"Wildcard _ variable - used to discard results per spec section 1.1"
+class Main : Object {
+    run [|
+        _ := 'first discard' print.
+        _ := 'second discard' print.
+        _ := (42 asString) print.
+        x := 10.
+        _ := x plus: 5.
+        _ := 'done' print.
+    ]
+}

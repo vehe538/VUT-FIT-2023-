@@ -1,0 +1,11 @@
+"asString on String returns self - spec section 2"
+class Main : Object {
+    run [|
+        s := 'hello'.
+        result := s asString.
+        _ := ((result identicalTo: s) asString) print.
+        _ := result print.
+        s2 := String new.
+        _ := (((s2 asString) identicalTo: s2) asString) print.
+    ]
+}

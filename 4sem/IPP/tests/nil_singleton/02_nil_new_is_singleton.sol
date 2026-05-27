@@ -1,0 +1,11 @@
+"Nil new always returns the same nil singleton - spec section 2"
+class Main : Object {
+    run [|
+        a := Nil new.
+        b := Nil new.
+        _ := ((a identicalTo: nil) asString) print.
+        _ := ((b identicalTo: nil) asString) print.
+        _ := ((a identicalTo: b) asString) print.
+        _ := (a asString) print.
+    ]
+}

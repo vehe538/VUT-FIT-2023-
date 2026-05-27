@@ -1,0 +1,16 @@
+"Multiple user-defined methods calling each other"
+class Main : Object {
+    run [|
+        _ := self printSquare: 4.
+        _ := self printSquare: 7.
+    ]
+    square: [ :n |
+        r := n multiplyBy: n.
+    ]
+    printSquare: [ :n |
+        sq := self square: n.
+        msg := (n asString) concatenateWith: ' squared is '.
+        msg := msg concatenateWith: (sq asString).
+        _ := msg print.
+    ]
+}

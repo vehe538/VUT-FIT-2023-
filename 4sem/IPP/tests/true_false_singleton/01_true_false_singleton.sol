@@ -1,0 +1,14 @@
+"true and false are singletons - spec section 2"
+class Main : Object {
+    run [|
+        a := true.
+        b := true.
+        _ := ((a identicalTo: b) asString) print.
+        _ := ((a identicalTo: true) asString) print.
+        c := false.
+        d := false.
+        _ := ((c identicalTo: d) asString) print.
+        _ := ((c identicalTo: false) asString) print.
+        _ := ((true identicalTo: false) asString) print.
+    ]
+}

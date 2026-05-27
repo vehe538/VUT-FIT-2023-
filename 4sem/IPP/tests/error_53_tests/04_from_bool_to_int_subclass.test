@@ -1,0 +1,20 @@
++++ ERROR_53_TESTS
+!C! 0
+!I! 51
+!I! 52
+!I! 53
+!I! 54
+>>> 1
+
+"Error 53 - from: on Integer subclass with a True object"
+class MyInt : Integer {
+    doubled [|
+        r := self multiplyBy: 2.
+    ]
+}
+
+class Main : Object {
+    run [|
+        x := MyInt from: true.
+    ]
+}

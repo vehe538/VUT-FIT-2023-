@@ -1,0 +1,22 @@
++++ BLOCK_SCOPING
+!C! 0
+!I! 0
+>>> 4
+
+"Block passed as argument retains original self - spec section 1.2.7"
+class Runner : Object {
+    execute: [ :blk |
+        _ := blk value.
+    ]
+}
+
+class Main : Object {
+    whoAmI [|
+        r := 'Main'.
+    ]
+    run [|
+        b := [| _ := (self whoAmI) print. ].
+        r := Runner new.
+        _ := r execute: b.
+    ]
+}

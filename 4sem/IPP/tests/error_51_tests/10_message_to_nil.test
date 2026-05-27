@@ -1,0 +1,16 @@
++++ ERROR_51_TESTS
+!C! 0
+!I! 0
+!I! 51
+!I! 52
+!I! 53
+!I! 54
+>>> 1
+
+"Error 51 - sending plus: to nil"
+class Main : Object {
+    run [|
+        x := nil.
+        _ := x plus: 1.
+    ]
+}

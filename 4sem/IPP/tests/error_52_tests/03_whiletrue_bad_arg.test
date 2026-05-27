@@ -1,0 +1,14 @@
++++ ERROR_52_TESTS
+!C! 0
+!I! 51
+!I! 52
+!I! 53
+!I! 54
+>>> 1
+
+"Error 52 - whileTrue: given argument that does not understand value"
+class Main : Object {
+    run [|
+        _ := [| r := true. ] whileTrue: 42.
+    ]
+}

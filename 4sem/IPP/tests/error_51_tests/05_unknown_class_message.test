@@ -1,0 +1,12 @@
++++ ERROR_51_TESTS
+!C! 0
+!I! 32
+!I! 51
+>>> 1
+
+"Error 51 / 32 - sending unknown class-level message"
+class Main : Object {
+    run [|
+        x := Integer unknownClassMethod.
+    ]
+}

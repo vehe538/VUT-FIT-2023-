@@ -1,0 +1,11 @@
+"asString for negative integers includes minus sign - spec section 2"
+class Main : Object {
+    run [|
+        _ := (42 asString) print.
+        _ := (-42 asString) print.
+        _ := (0 asString) print.
+        _ := (-1 asString) print.
+        _ := (((-42 asString) equalTo: '-42') asString) print.
+        _ := (((42 asString) equalTo: '42') asString) print.
+    ]
+}

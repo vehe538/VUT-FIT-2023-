@@ -1,0 +1,22 @@
++++ INHERITANCE_TESTS
+!C! 0
+!I! 0
+>>> 3
+
+"Testing boolean and:, or:, not with block arguments (short-circuit)"
+class Main : Object {
+    run [|
+        x := 5.
+        y := 10.
+        r1 := (x greaterThan: 3) and: [| r := y greaterThan: 7. ].
+        _ := (r1 asString) print.
+        r2 := (x greaterThan: 10) and: [| r := y greaterThan: 7. ].
+        _ := (r2 asString) print.
+        r3 := (x greaterThan: 3) or: [| r := false. ].
+        _ := (r3 asString) print.
+        r4 := (x greaterThan: 10) not.
+        _ := (r4 asString) print.
+        y2 := (true and: [| _ := false isBoolean. ]) or: [| _ := nil. ].
+        _ := (y2 asString) print.
+    ]
+}

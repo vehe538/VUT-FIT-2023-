@@ -1,0 +1,13 @@
+"String escape sequences: \n, \\, \' per spec section 1.1"
+class Main : Object {
+    run [|
+        newline := 'line1\nline2'.
+        _ := newline print.
+        backslash := 'back\\slash'.
+        _ := backslash print.
+        quote := 'it\'s here'.
+        _ := quote print.
+        _ := ((newline length) asString) print.
+        _ := ((backslash length) asString) print.
+    ]
+}

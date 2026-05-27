@@ -1,0 +1,19 @@
+"From spec section 1.2.12 - methods, selectors, basic message sending"
+class Main : Object {
+    run [|
+        x := self compute: 3 and: 2 and: 5.
+        x := self plusOne: (self vysl).
+        y := x asString.
+        _ := y print.
+    ]
+    plusOne: [ :x |
+        r := x plus: 1.
+    ]
+    compute:and:and: [ :x :y :z |
+        a := x plus: y.
+        _ := self vysl: a.
+        _ := ((self vysl) greaterThan: 0)
+            ifTrue: [| u := self vysl: 1. ]
+            ifFalse: [|].
+    ]
+}

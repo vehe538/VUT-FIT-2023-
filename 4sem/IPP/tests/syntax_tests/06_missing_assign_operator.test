@@ -1,0 +1,13 @@
++++ SYNTAX_TESTS
+!C! 0
+!C! 1
+!C! 2
+
+>>> 1
+
+"Missing := assignment operator - spec 1.2.3"
+class Main : Object {
+    run [|
+        x = 42.
+    ]
+}

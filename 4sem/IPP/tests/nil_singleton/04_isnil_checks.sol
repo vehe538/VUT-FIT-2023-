@@ -1,0 +1,12 @@
+"isNil returns true for nil, false for other objects - spec section 2"
+class Main : Object {
+    run [|
+        _ := ((nil isNil) asString) print.
+        _ := ((42 isNil) asString) print.
+        _ := (('hello' isNil) asString) print.
+        _ := ((true isNil) asString) print.
+        _ := ((false isNil) asString) print.
+        x := Object new.
+        _ := ((x isNil) asString) print.
+    ]
+}

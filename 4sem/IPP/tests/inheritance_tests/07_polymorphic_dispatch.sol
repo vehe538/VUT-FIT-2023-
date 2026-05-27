@@ -1,0 +1,40 @@
+"Polymorphic dispatch - same message sent to different object types"
+class Shape : Object {
+    area [|
+        r := 0.
+    ]
+    printArea [|
+        a := self area.
+        _ := (a asString) print.
+    ]
+}
+
+class Square : Shape {
+    initSide: [ :s |
+        _ := self side: s.
+    ]
+    area [|
+        r := (self side) multiplyBy: (self side).
+    ]
+}
+
+class Rectangle : Shape {
+    initWidth:height: [ :w :h |
+        _ := self width: w.
+        _ := self height: h.
+    ]
+    area [|
+        r := (self width) multiplyBy: (self height).
+    ]
+}
+
+class Main : Object {
+    run [|
+        sq := Square new.
+        _ := sq initSide: 4.
+        _ := sq printArea.
+        rect := Rectangle new.
+        _ := rect initWidth: 3 height: 5.
+        _ := rect printArea.
+    ]
+}

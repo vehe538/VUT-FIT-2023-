@@ -1,0 +1,23 @@
++++ INTEGER_EDGE_CASES
+!C! 0
+!I! 0
+>>> 1
+
+"Integer subclass from: another Integer - copies internal numeric value"
+class MyInt : Integer {
+    doubled [|
+        r := self multiplyBy: 2.
+    ]
+}
+
+class Main : Object {
+    run [|
+        a := MyInt from: 7.
+        _ := (a asString) print.
+        _ := ((a doubled) asString) print.
+        b := MyInt from: a.
+        _ := (b asString) print.
+        _ := ((a equalTo: b) asString) print.
+        _ := ((a identicalTo: b) asString) print.
+    ]
+}

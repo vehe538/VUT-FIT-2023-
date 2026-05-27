@@ -1,0 +1,20 @@
++++ STRING_EDGE_CASES
+!C! 0
+!I! 0
+>>> 1
+
+"startsWith:endsBefore: with non-positive args returns nil - spec section 2"
+class Main : Object {
+    run [|
+        s := 'hello'.
+        r1 := s startsWith: -1 endsBefore: 3.
+        _ := ((r1 isNil) asString) print.
+        r2 := s startsWith: 0 endsBefore: 3.
+        _ := ((r2 isNil) asString) print.
+        r3 := s startsWith: 1 endsBefore: 1.
+        _ := r3 print.
+        _ := ((r3 length) asString) print.
+        r4 := s startsWith: 3 endsBefore: 100.
+        _ := r4 print.
+    ]
+}

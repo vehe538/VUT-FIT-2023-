@@ -1,0 +1,105 @@
+"""
+This module contains the main logic of the interpreter.
+
+IPP: You must definitely modify this file. Bend it to your will.
+
+Author: Ondřej Ondryáš <iondryas@fit.vut.cz>
+Author:
+"""
+
+import logging
+
+# from frame_objects.frame_stack import ClassFrameStack
+import sys
+from pathlib import Path
+from typing import TextIO
+
+from lxml import etree
+from lxml.etree import ParseError
+from pydantic import ValidationError
+
+import interpreter.input_stream as input_stream
+from frame_objects.frame_stack import BlockFrameStack
+from frame_objects.frames import ClassFrame, ProgramFrame
+from helper_objects.class_record import ClassRecord
+from interpreter.error_codes import ErrorCode
+from interpreter.exceptions import InterpreterError
+from interpreter.input_model import Program
+
+logger = logging.getLogger(__name__)
+
+
+class Interpreter:
+    """
+    The main interpreter class, responsible for loading the source file and executing the program.
+    """
+
+    def __init__(self) -> None:
+        self.current_program: Program | None = None
+
+    def load_program(self, source_file_path: Path) -> None:
+        """
+        Reads the source SOL-XML file and stores it as the target program for this interpreter.
+        If any program was previously loaded, it is replaced by the new one.
+
+        IPP: If you wish to run static checks on the program before execution, this is a good place
+             to call them from.
+        """
+
+        logger.info("Opening source file: %s", source_file_path)
+        try:
+            xml_tree = etree.parse(source_file_path)
+        except ParseError as e:
+            raise InterpreterError(
+                error_code=ErrorCode.INT_XML, message="Error parsing input XML"
+            ) from e
+        try:
+            self.current_program = Program.from_xml_tree(xml_tree.getroot()) # type: ignore
+        except ValidationError as e:
+            raise InterpreterError(
+                error_code=ErrorCode.INT_STRUCTURE, message="Invalid SOL-XML structure"
+            ) from e
+
+    def execute(self, input_io: TextIO) -> None:
+        """
+        Executes the currently loaded program, using the provided input stream as standard input.
+        """
+        logger.info("Executing program")
+        input_stream.stream = input_io
+        self.load_program(Path(sys.argv[2]))
+        if self.current_program is None:
+            raise InterpreterError(ErrorCode.INT_XML, "No program loaded.")
+        root = self.current_program.to_xml_tree()
+
+        # create program frame for storing classes and their parents + messags they understand
+        has_main = False
+        program_frame = ProgramFrame()
+        main_frame_stack = BlockFrameStack()
+        for class_root in root:
+            # for each class also create frame so we can store
+            # methods and their definitions in memory
+            class_name = class_root.get("name") or ""
+            class_parent = class_root.get("parent") or ""
+            class_frame = ClassFrame(class_name, class_parent)
+            if class_root.get("name") == "Main":
+                has_main = True
+            # write class records into program frame
+            new_class_rec = ClassRecord(class_root, main_frame_stack, class_frame, program_frame)
+            if class_name in program_frame.obj_dict:
+                raise InterpreterError(ErrorCode.SEM_ERROR, "Redefinition of class.")
+            program_frame.write(class_name, new_class_rec)
+
+        # static semantics checks BEFORE calling run()
+        for rec in program_frame.obj_dict.values():
+            rec._base_lookup()
+            rec._parent_lookup()
+
+        if has_main:
+            main_record = program_frame.read("Main")
+            try:
+                run_block = main_record.current_class_frame.read("run")
+                run_block.value()
+            except KeyError:
+                raise InterpreterError(ErrorCode.SEM_MAIN, "Missing 'run' method.") from None
+        else:
+            raise InterpreterError(ErrorCode.SEM_MAIN, "Missing 'Main' class.")

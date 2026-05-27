@@ -1,0 +1,16 @@
++++ TRUE_FALSE_SINGLETON
+!C! 0
+!I! 0
+>>> 1
+
+"ifTrue:ifFalse: returns the value of the executed block - spec section 2"
+class Main : Object {
+    run [|
+        r1 := true ifTrue: [| r := 42. ] ifFalse: [| r := 0. ].
+        _ := (r1 asString) print.
+        r2 := false ifTrue: [| r := 42. ] ifFalse: [| r := 99. ].
+        _ := (r2 asString) print.
+        r3 := true ifTrue: [| x := 1. ] ifFalse: [| r := 0. ].
+        _ := (r3 asString) print.
+    ]
+}

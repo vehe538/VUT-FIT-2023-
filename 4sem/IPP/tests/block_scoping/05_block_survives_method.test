@@ -1,0 +1,25 @@
++++ BLOCK_SCOPING
+!C! 0
+!I! 0
+>>> 4
+
+"Block stored in object attribute survives beyond its defining method scope"
+class Main : Object {
+    makeCounter [|
+        count := 0.
+        b := [|
+            count := count plus: 1.
+            r := count.
+        ].
+        _ := self storedBlock: b.
+    ]
+    run [|
+        _ := self makeCounter.
+        r1 := (self storedBlock) value.
+        _ := (r1 asString) print.
+        r2 := (self storedBlock) value.
+        _ := (r2 asString) print.
+        r3 := (self storedBlock) value.
+        _ := (r3 asString) print.
+    ]
+}

@@ -1,0 +1,14 @@
+"Testing nil, true, false literals and isNil, isBoolean checks"
+class Main : Object {
+    run [|
+        n := nil.
+        t := true.
+        f := false.
+        _ := (n asString) print.
+        _ := (t asString) print.
+        _ := (f asString) print.
+        _ := ((t isBoolean) asString) print.
+        _ := ((f isBoolean) asString) print.
+        _ := ((n isNil) asString) print.
+    ]
+}

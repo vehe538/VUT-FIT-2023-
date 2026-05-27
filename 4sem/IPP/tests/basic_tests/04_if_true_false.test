@@ -1,0 +1,19 @@
++++ BASIC_TESTS
+!C! 0
+!I! 0
+>>> 1
+
+"Testing ifTrue:ifFalse: with boolean results"
+class Main : Object {
+    run [|
+        x := 5.
+        result := (x greaterThan: 3)
+            ifTrue: [| r := 'x is greater than 3'. ]
+            ifFalse: [| r := 'x is not greater than 3'. ].
+        _ := result print.
+        result2 := (x greaterThan: 10)
+            ifTrue: [| r := 'x is greater than 10'. ]
+            ifFalse: [| r := 'x is not greater than 10'. ].
+        _ := result2 print.
+    ]
+}

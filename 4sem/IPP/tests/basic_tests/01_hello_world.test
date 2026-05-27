@@ -1,0 +1,11 @@
++++ BASIC_TESTS
+!C! 0
+!I! 0
+>>> 1
+
+"Basic hello world - prints a string"
+class Main : Object {
+    run [|
+        _ := 'Hello, World!' print.
+    ]
+}

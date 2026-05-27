@@ -1,0 +1,13 @@
+"From spec section 1.2.6 - method returning block result, instance attributes"
+class Main : Object {
+    run [|
+        a := self foo: 4.
+        _ := (a asString) print.
+        b := [ :x | _ := 42. ].
+        c := b value: 16.
+        _ := (c asString) print.
+    ]
+    foo: [ :x |
+        u := x plus: 10.
+    ]
+}

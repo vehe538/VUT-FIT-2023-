@@ -1,0 +1,8 @@
+"Error 52 - asInteger on non-numeric string returns nil, then plus: on nil fails"
+class Main : Object {
+    run [|
+        s := 'not a number'.
+        n := s asInteger.
+        _ := n plus: 1.
+    ]
+}

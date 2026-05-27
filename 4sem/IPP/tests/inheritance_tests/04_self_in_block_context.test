@@ -1,0 +1,20 @@
++++ INHERITANCE_TESTS
+!C! 0
+!I! 0
+>>> 3
+
+"From spec section 1.2.7 - self reference and static scoping of blocks"
+class A : Object {
+    foo: [ :x |
+        u := x value: 'foo'.
+    ]
+}
+
+class Main : Object {
+    run [|
+        a := A new.
+        b := [ :arg | y := self attr: arg. z := self. ].
+        c := a foo: b.
+        _ := (self attr) print.
+    ]
+}

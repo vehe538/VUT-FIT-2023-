@@ -1,0 +1,14 @@
+"from: shallow copies instance attributes - spec section 1.2.10"
+class Main : Object {
+    run [|
+        a := Object new.
+        inner := Object new.
+        _ := inner label: 'shared'.
+        _ := a data: inner.
+        b := Object from: a.
+        _ := ((b data) label) print.
+        _ := (((a data) identicalTo: (b data)) asString) print.
+        _ := inner label: 'modified'.
+        _ := ((b data) label) print.
+    ]
+}

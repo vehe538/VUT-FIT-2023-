@@ -1,0 +1,16 @@
+"Block result is value of last evaluated expression - spec section 1.2.6"
+class Main : Object {
+    run [|
+        b := [|
+            x := 1.
+            y := 2.
+            z := x plus: y.
+        ].
+        result := b value.
+        _ := (result asString) print.
+        result2 := (3 greaterThan: 1)
+            ifTrue: [| r := 'yes'. ]
+            ifFalse: [| r := 'no'. ].
+        _ := result2 print.
+    ]
+}

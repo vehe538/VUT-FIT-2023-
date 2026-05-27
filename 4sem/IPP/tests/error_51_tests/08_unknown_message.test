@@ -1,0 +1,15 @@
++++ ERROR_51_TESTS
+!C! 0
+!I! 51
+!I! 52
+!I! 53
+!I! 54
+>>> 1
+
+"Error 51 - sending unknown message to an object"
+class Main : Object {
+    run [|
+        x := 42.
+        _ := x fly.
+    ]
+}

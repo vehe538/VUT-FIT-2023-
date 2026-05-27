@@ -1,0 +1,14 @@
+"isBlock returns true for Block instances and subclasses - spec section 2"
+class Main : Object {
+    run [|
+        b1 := [| r := 1. ].
+        b2 := [ :x | r := x. ].
+        b3 := Block new.
+        _ := ((b1 isBlock) asString) print.
+        _ := ((b2 isBlock) asString) print.
+        _ := ((b3 isBlock) asString) print.
+        _ := ((42 isBlock) asString) print.
+        _ := (('hello' isBlock) asString) print.
+        _ := ((nil isBlock) asString) print.
+    ]
+}

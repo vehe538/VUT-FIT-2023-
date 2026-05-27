@@ -1,0 +1,26 @@
+"super used as argument behaves like self per spec section 1.2.8"
+class Base : Object {
+    whoAmI [|
+        r := 'Base'.
+    ]
+}
+
+class Child : Base {
+    whoAmI [|
+        r := 'Child'.
+    ]
+    run [|
+        result := self checkIdentity: super.
+        _ := (result asString) print.
+    ]
+    checkIdentity: [ :obj |
+        r := self identicalTo: obj.
+    ]
+}
+
+class Main : Object {
+    run [|
+        c := Child new.
+        _ := c run.
+    ]
+}

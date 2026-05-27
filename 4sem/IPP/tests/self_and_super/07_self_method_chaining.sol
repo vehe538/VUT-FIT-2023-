@@ -1,0 +1,26 @@
+"Chaining method calls via self - builder pattern"
+class Builder : Object {
+    setName: [ :n |
+        _ := self name: n.
+        r := self.
+    ]
+    setAge: [ :a |
+        _ := self age: a.
+        r := self.
+    ]
+    build [|
+        msg := (self name) concatenateWith: ' age '.
+        msg := msg concatenateWith: ((self age) asString).
+        r := msg.
+    ]
+}
+
+class Main : Object {
+    run [|
+        b := Builder new.
+        _ := b setName: 'Alice'.
+        _ := b setAge: 30.
+        result := b build.
+        _ := result print.
+    ]
+}

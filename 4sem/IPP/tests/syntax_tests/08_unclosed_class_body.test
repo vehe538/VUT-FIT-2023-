@@ -1,0 +1,12 @@
++++ SYNTAX_TESTS
+!C! 0
+!C! 1
+!C! 2
+
+>>> 1
+
+"Unclosed class body - class body must be terminated with }"
+class Main : Object {
+    run [|
+        x := 1.
+    ]

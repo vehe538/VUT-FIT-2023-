@@ -1,0 +1,13 @@
++++ SYNTAX_TESTS
+!C! 0
+!C! 1
+!C! 2
+
+>>> 1
+
+"Unclosed string literal - string must be terminated with single quote"
+class Main : Object {
+    run [|
+        x := 'unclosed string.
+    ]
+}

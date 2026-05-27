@@ -1,0 +1,11 @@
+"isNil, isString, isNumber, isBlock all return false on plain Object - spec section 2"
+class Main : Object {
+    run [|
+        o := Object new.
+        _ := ((o isNil) asString) print.
+        _ := ((o isString) asString) print.
+        _ := ((o isNumber) asString) print.
+        _ := ((o isBlock) asString) print.
+        _ := ((o isBoolean) asString) print.
+    ]
+}

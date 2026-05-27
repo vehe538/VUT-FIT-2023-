@@ -1,0 +1,18 @@
+"Testing startsWith:endsBefore: substring extraction"
+class Main : Object {
+    run [|
+        s := 'Hello World'.
+        "Extract 'Hello' (1 to 6)"
+        sub1 := s startsWith: 1 endsBefore: 6.
+        _ := sub1 print.
+        "Extract 'World' (7 to 12)"
+        sub2 := s startsWith: 7 endsBefore: 12.
+        _ := sub2 print.
+        "endsBefore > length returns to end"
+        sub3 := s startsWith: 7 endsBefore: 100.
+        _ := sub3 print.
+        "Difference <= 0 returns empty string"
+        sub4 := s startsWith: 5 endsBefore: 3.
+        _ := sub4 print.
+    ]
+}

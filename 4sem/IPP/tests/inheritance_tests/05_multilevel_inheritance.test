@@ -1,0 +1,43 @@
++++ INHERITANCE_TESTS
+!C! 0
+!I! 0
+>>> 3
+
+"Multi-level inheritance chain - 3 levels deep"
+class Vehicle : Object {
+    describe [|
+        _ := 'I am a vehicle' print.
+    ]
+    move [|
+        _ := 'Moving...' print.
+    ]
+}
+
+class Car : Vehicle {
+    move [|
+        _ := 'Driving on road' print.
+    ]
+    honk [|
+        _ := 'Beep beep!' print.
+    ]
+}
+
+class SportsCar : Car {
+    move [|
+        _ := 'Driving fast on road' print.
+    ]
+    turbo [|
+        _ := 'Turbo engaged!' print.
+        _ := super move.
+    ]
+}
+
+class Main : Object {
+    run [|
+        s := SportsCar new.
+        _ := s describe.
+        _ := s move.
+        _ := s honk.
+        _ := s turbo.
+    ]
+}

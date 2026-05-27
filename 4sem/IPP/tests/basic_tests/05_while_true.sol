@@ -1,0 +1,11 @@
+"Testing whileTrue: block loop - counts down from 3"
+class Main : Object {
+    run [|
+        _ := self cnt: 3.
+        _ := [| r := (self cnt) greaterThan: 0. ] whileTrue:
+            [|
+                _ := ((self cnt) asString) print.
+                _ := self cnt: ((self cnt) minus: 1).
+            ].
+    ]
+}

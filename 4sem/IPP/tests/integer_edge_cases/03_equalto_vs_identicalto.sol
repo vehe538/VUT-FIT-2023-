@@ -1,0 +1,11 @@
+"equalTo: vs identicalTo: for integers - spec section 2"
+class Main : Object {
+    run [|
+        x := 1.
+        y := 1.
+        z := Integer from: 1.
+        _ := ((x equalTo: y) asString) print.
+        _ := ((x equalTo: z) asString) print.
+        _ := ((x equalTo: 1) asString) print.
+    ]
+}

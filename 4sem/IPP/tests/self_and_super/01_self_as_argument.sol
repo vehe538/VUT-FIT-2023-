@@ -1,0 +1,16 @@
+"self passed as argument to another method"
+class Printer : Object {
+    printObject: [ :obj |
+        _ := (obj asString) print.
+    ]
+}
+
+class Main : Object {
+    asString [|
+        r := 'I am Main'.
+    ]
+    run [|
+        p := Printer new.
+        _ := p printObject: self.
+    ]
+}
