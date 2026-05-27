@@ -1,1 +1,1 @@
-# IFJ-Project
+**[Otvoriť dokumentáciu (PDF)(./dokumentace.pdf)**
