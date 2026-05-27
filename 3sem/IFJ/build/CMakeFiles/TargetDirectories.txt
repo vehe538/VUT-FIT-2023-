@@ -1,3 +1,0 @@
-/home/msik/skola/ifj/IFJ24-PROJEKT/build/CMakeFiles/ifjcompiler.dir
-/home/msik/skola/ifj/IFJ24-PROJEKT/build/CMakeFiles/edit_cache.dir
-/home/msik/skola/ifj/IFJ24-PROJEKT/build/CMakeFiles/rebuild_cache.dir
