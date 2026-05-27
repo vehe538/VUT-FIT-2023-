@@ -1,5 +1,6 @@
 
-# Dokumentácia k projektu IPP  *(hodnotenie 17.5/20)*
+# Dokumentácia k projektu IPP  
+*(hodnotenie 17.5/20)*
 ## Popis návrhu riešenia
 Každému prvku návrhu je ako jeden z argumentov predaný príslušný XML koreň, ktorý prvok podľa svojej funkcie prechádza a predáva svoje podkorene ďalším prvkom. Okrem toho sa prvkom predáva **zásobník rámcov** pre bloky, aktuálny **triedny rámec** a **programový rámec** (podrobnejšie vysvetlenie ich významu v časti [Dátové štruktúry](#dátové-štruktúry)).
 Na začiatku, pre vytvorenie [základných štruktúr](#ako-základné-štruktúry-budem-v-texte-uvažovať-xml-koreň-zásobník-rámcov-pre-bloky-triedny-rámec-a-programový-rámec)*, program iteruje cez základný koreň `program` a pre každú triedu vytvára triedny rámec a s ním potom  tzv. *triedny záznam*. Taktiež kontroluje prítomnosť triedy `Main` a jej metódy `run`. Po tomto cykle sa nad triedou `Main` zavolá metóda `run`, ktorá pošle objektu bloku, ktorý jej patrí správu `value`, čím začína samotná interpretácia. Program by sa teda dal rozdeliť do dvoch väčších častí:
