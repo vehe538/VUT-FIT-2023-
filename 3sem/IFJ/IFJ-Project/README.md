@@ -1,1 +1,1 @@
-**[Otvoriť dokumentáciu (PDF)(./dokumentace.pdf)**
+**[Otvoriť dokumentáciu (PDF)](./dokumentace.pdf)**
