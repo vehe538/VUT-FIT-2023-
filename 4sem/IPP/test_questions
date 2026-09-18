@@ -1,0 +1,336 @@
+
+Imerativny/deklarativny jazyk:
+ - imperativny jazyk:
+	- programator urcuje co, kedy a ako sa ma vykonat
+	- programator modifikuje vnutorny stav programu krok za krokom
+	- pouziva cykly, podmienky, sekvencie prikazov
+	- opakovanie je riesene pomocou cyklov/rekurzie
+ - deklarativny jazyk:
+	- programator urcuje iba co sa ma vykonat
+	- vnutorny stav programu je neznamy 	
+	- poradie je urcene na zakladne strategie prekladaca
+	- opakovanie pomocou rekurzie
+
+Adapter (wrapper):
+ - navrhovy vzor, ktory umoznuje objektu pouzivat rozhranie ineho objektu
+   bez toho, aby sa menila definicia niektoreho z nich
+
+Typ premennej:
+ - obor hodnot premennej, ktorych moze nadobudat
+ - sposob ukladanie premennej do pamate
+ - mnozina operacii, ktore je mozne s premennou vykonavat
+
+Rozsah platnosti premennej:
+ - cast programu, v ktorej je mozne pracovat s premennou
+
+Dynamicke semanticke chyby:
+ - semanticke chyby, ktore vznikaju az za behu programu
+ - napr. delenie nulou po uzivatelskom vstupe, pristupovanie na neplatny index v poli,
+	 zla praca s pamatou, neexistujuce meno suboru pri praci s externymi subormi
+
+Semantika:
+ - definuje vyznam jednotlivych syntaktickych konstrucii
+ - staticka - vlastnost programu, ktoru je mozne overit v case prekladu
+ - dynamicka - vlastnost programu, ktoru je mozne overit az za behu
+
+Observer:
+ - behavioralny navrhovy vzor
+ - definuje vztah 1 ku n
+ - n sledovatelov je citlivych na zmenu jedneho subjektu
+ - sledovatelia obsahuju metody pre pripad zmeny nejakeho vnutorneho stavu subjektu
+ - subjekt musi obsahovat metodu na upozornenie na zmenu stavu
+
+Doba zivota premennej:
+ - casovy interval, v ktorom je premennej alokovana pamat
+
+Problemy viacnasobnej dedicnosti:
+ - definicia metod s rovnakym nazvom a rovnakeho typu  novej podtriedy
+ - definicia metod s rovnakym nazvom a rozneho typu  novej podtriedy
+ - atributy rovnakeho mena a typu novej podtriedy
+
+-----
+1. Predavanie parametrov v strukturovanych jazykoch - 3 moznosti 
+ - bez podpory - jazyk nepodporuje pracu so strukrurami ako s paramterami
+ - odkazom - jazyk predava iba odkazy na struktury (ukazatele do pamate), zapis je rovnaky ako pri predavani hodnotou
+ - hodnotou - pre parameter je na programovom zasobniku alokovana pamat, do ktorej je vlozena kopia parametra
+
+2. UML navrhovych vzorov 
+ - adapter OK
+ - observer OK
+ - decordator OK
+
+
+3. Co je to uzavrety podprogram (klucove vlastnosti):
+ - kus kodu, ktory ma samostnane alokovanu pamat a do ktoreho dokaze program 'odskocit', vykonat prikazy v jeho tele a skocit naspat
+
+ - obsahuje:
+	- jednoznacny nazov	- identifikator, podla ktoreho je volany; jeho vyskyt nie je sucastou hlavneho toku
+ 	- definovane rozhr.	- explicitne uvedeny zoznam parametrov a navratova hodnota; prichadzajuce a odchadzajuce data prudia len skrz toto rozhranie
+	- menny priestor	- ma vlastne lokalne premenne, ktore su zvonka neviditelne, co eliminuje problem s koliziou s vonkajsimi premennymi
+	- skryta implem.	- telo podprogramu je pre volajuceho nezname; vstup je mozny len cez rozhranie a vystup cez navratovu hodnotu
+
+
+4. Problemy viacnasobnej dedicnosti
+ - definicia metod rovnakeho nazvu a typu novej podtriedy
+ - definicia metod rovnakeho nazvu a rozneho typu novej podtriedy
+ - definicia atributov rovnakeho nazvu a typu
+
+5. Robinsonov algoritmus
+vstup: mnozina literalov /\, ktore chceme unifikovat
+vystup: mnozina substitucii u (MGU) alebo chyba
+implem:
+
+u = [] // prazdna substitucia
+
+while nesuhlasny_par in u(/\):
+
+	p = u(/\).prvy_nesuhlasny_par
+	if volna_premenna not in p:
+		return error
+	else:
+		p = (x, t) // x je premenna, t je term
+		if x in t: // kontrola vyskytu
+			return error
+		else:
+			u = u o [t/x];
+
+return u;
+princip:
+Algoritmus opakovane nachadza prvy nesuhlasny par v dvojici vstupnych literalov, ktore prechadza zlava doprava. Rozdiely odstranuje substituciou, v ktorej je premenna jedneho literalu nahradena
+termom druheho. Nasledne je substitucia aplikovana na zvysok vstupu. Algoritmus konci ak su vstupne literaly zhodne alebo ak nie je mozne vykonat substitutciu.
+
+6. try/catch
+
+7. Rozdiel staticka/triedna metoda
+Triedna:
+	- metoda, ktora je definovana v tele triedy a je priamo viazana k tejto triede - moze menit jej definiciu
+ 	- nema pristup k jej instanciam ale k sposobu ich vytvarania
+Staticka:
+	- metoda, ktora je definovana v tele triedy, ale nema pristup ani k jej definicii ani k jej instanciam
+	- s triedou suvisi len vyznamom alebo sluzi ako pomocna metoda
+
+8. Deklaratiny/imperativny jazyk
+Imperativny:
+	- programator urcuje CO a V AKOM PORADI sa ma vykonat
+	- programator definuje vnutorny stav programu, krok za krokom
+	- obsahuje premenne, skoky, podmienky, funkcie, aritm. operacie...
+	- opakovanie je dosiahnute pros. cyklov alebo rekurzie
+
+Deklarativny:
+	- programator urcuje iba CO sa ma vykonat
+	- vnutorny stav programu je neznamy
+	- poradie vyhodnocovanie zavisi na strategii prekladaca
+	- podporuje rekurziu
+
+9. syntax/semantika, chyby, ktore nepatrie ani jednej kategorii
+Syntax: subor pravidiel, ktore urcuju ako sa mozu za seba radit jednotlive jazykove konstrukcie
+Semantika:	
+	- popis vyznamu jednotlivych jazykovych konstrukcii
+	- staticka: mozno odchytit uz v dobe prekladu (existencia premennej/funkcie, datova kompatibilita)
+	- dynamicka: mozno odchytit az za behu programu (delenie nulou, pristup na index pola, dereferencia NULL ukazatela)
+- sposoby popisu:
+	- axiomaticka
+	- operacna
+	- denotacna
+	- neformalna
+
+ine problemy:
+	- pretecenie zasobnika
+	- zla praca s pamatou 
+	- nevhodna praca s externymi zdrojmi (lokalne subory, API, kniznice...)
+
+10. Doba zivota premennej
+ - casovy interval, pocas ktoreho je pre premennu alokovana pamat
+ - staticka (cely beh programu), automaticka (v ramci jedneho bloku), dynamicka (od alokacie po uvolnenie)
+
+11. Lambda kalkul
+
+12. Co je to Strict Evaluation
+ - strategia vyhodnocovania parametrov, kedy su ich hodnoty vycislene pred volanim funkcie a nasledne su odovzdavane podla ich vyuzitia
+ - pocet vyhodnoteni jedneho parametru je 1
+ - vyhody: predvidatelny vypocet, mensie pamatove naroky oproti Lazy eval (call-by-name)
+ - nevyhody: vypocet prebehne aj v pripade ze param. nie je vyuzity
+
+13. Funkcionalne vs. logicke jazyky - popisat rysy
+Funkcionalne:
+ - vypocet ako vyhodnotenie funkcie
+ - funkcie su prvotriednymi hodnotami - su parametrami, navratove hodnoty, ukladane v strukturach,...
+ - nedochadza k vedlajsim efektom - premenne su imutabilne
+ - silny typovy system - podpora typovej inferencie
+ - Lazy & Strict eval
+ - napr. Haskell, ML
+
+Logicke:
+ - vypocet ako dokaz ciela mnoziny klauzul
+ - predikat namiesto funkcie - rovnaky predikat funguje vo viacerych smeroch
+ - neobsahuje proceduralne premenne - tie funguje ako placeholdery v termoch
+ - vyhodnocovanie pomocou unifikacie a backtrackingu
+ - napr. Prolog
+
+14. 2D pole struktur - vzorec pre vypocet adresy
+
+15.
+Typovost:
+ - beztypove	- jazyky, v ktorych nema zmysel uvazovat typy (teoreticke formalizmy)
+ - dynamicky typovane 	- jazyky, v ktorych su typy premennych urcene podla ich hodnoty, mozu sa meni za behu, jazyky obsahuju implicitne konverzie
+ - staticky typovane - typy premennych su urcene v dobe prekladu, pocas behu su nemenne
+
+typ urcuje:
+ - mnozinu hodnot, ktorych moze premenna nadobudat
+ - mnozinu operacii, ktore je mozno nad premennou vykonavat
+ - velkost pamata potrebnej na alkokaciu pri ukladani premennej
+
+16.
+Ukladanie Union v C:
+ - prvky su ulozene v jednom suvislom bloku pamate, pricom vsetky zdielaju tu istu pamat
+ - velkost zodpoveda velkosti najvacsieho prvku
+ - pri prepisani sa prepisu vsetky prvky, pretoze zdielaju ten isty pamatovy blok
+ - vhodne pre systemy citlive na zdroje
+
+17.
+Hornova klauzula:
+ - specialny typ logickeho vyroku v predikatovej alebo vyrokovej logike, ktory obsahuje najviac jeden kladny literal
+ - specialne pripady:
+	- fakt - hlavicka bez tela: vztah(X,Y).
+	- pravidlo - telo s hlavickou: vztah1(X,Y) :- vztah2(X,Y).
+	- dotaz - bez hlavicky:	?- vztah(X,Y).
+
+SLD rezolucia:
+ - strategia vypoctu v Prologu
+ - proces hladania dokazu ciela z mnoziny Hornovych klauzul
+ - postupy prehladavania:
+	- zhora dolu
+	- zlava doprava
+	- do hlbky
+ - suvislost: v kazdom kroku vyuziva Robinsonov algoritmus pre unifikaciu
+
+
+-----
+ FLASHCARDS
+
+#2
+rozhranie:
+ - sada neimplementovanych metod, ktorym objekt rozumie a ktorych implementacia zavisi na kazdej instancii - umoznuje polymorfismus
+abstraktna trieda: 
+ - trieda, ktora obsahuje implementovane alebo neimplementovane metody, ktora sluzi hlavne ako zaklad dedicnosti
+sim. konceptu rozhrania:
+ - ked trieda dedi z jej nadtriedy a implementuje jej metody, povieme ze nadtrieda je abstraktnou triedou a jej metody su pre podtriedu rozhranim
+
+#3
+semantika:
+ - popis vyznamu jednotlivych jazykovych konstrukcii
+ - 1) kontrola redefinicii/redeklaracii
+ - 2) kontrola datovych typov operandov
+
+#4
+vypocet:
+- adresa a[x] = (x - <hodnota_prveho>) * <velkost_prvkov> + <adresa prveho prvku>
+
+
+#5
+klonovanie objektu:
+ - klonovanie prebieha vytvorenim kopie nejakeho prototypu
+ - kopia moze byt plytna (vytvaraju sa len odkazy) alebo hlboka (pre novy objekt je alokovana pamat)
+ - nazov: JavaScript
+
+#6
+sprava:
+ - sprava obsahuje: nazov prijemcu, nazov spravy, zoznam argumentov
+ - verejny protokol je sposob ako objekty medzi sebou komunikuju - ake spravy si mozu medzi sebou posielat
+
+#7
+ukladanie struct v C:
+ - v pamati sa uklada ako jeden suvisly blok bajtov
+ - ovplyvnuje ho poradie deklaracii prvkov, padding a zarovnanie, datova velkost prvkov
+ - pristup k premennej je priamy, pristup k prvku structu zalezi na jeho ulozeni v pamati
+
+#8
+typ vazieb ovplyvnitelne v pythone:
+ - zmena vazby medzi premennou a objektom pomocou prirovnania
+ - dynamicke priradovanie nazvu pomocou locals() alebo globals()
+ - vazba na mutabilne alebo imutabilne objekty
+ - uzavery ktore si pamataju hodnoty premennych v case
+ - zmena vazby v mennom priestore pomocou manipulacie s globalnymi premennymi 
+
+#9
+explicitne rusenie instancie:
+- bud za pouzitia metod __del__, gc.collect alebo close() alebo pomocou kontextovych manazerov na spravu externych prostriedkov
+
+
+#10
+delegacia v Self + implem:
+ - delegacia nastane ked nejakemu objektu je poslana sprava a ten ju presmeruje inemu objektu (delegatu), ktory poskytne pozadovane spravanie
+ - SELF podporuje prototypove dedenie, kde objekty mozu dedit vlastnosti a metody inych objektov a mozu delegovat metody na ine objekty
+ - delegacia zvysuje modularitu, pretoze objekty nemusia nutne obsahovat implementaciu kazdej spravy
+
+
+#11
+netypovany jazyk:
+ - jazyk, v ktorom typy premennych nie su predom stanovene, mozu sa dynamicky menit za behu programu
+ - * v pythone:
+	- cisla - nasobenie cisel
+	- zoznamy - opakovanie zoznamov
+ 	- retazce - spajanie retazcov
+
+#12
+konstruktor ako inst. metoda:
+ - sluzi na inicializaciu kazdej instancie triedy - udava atributom objektu pociatocne hodnoty 
+konstruktor ako triedna metoda:
+ - pre kazdu novu instanciu je alokuje pamat, alternativny sposob vytvarania instancii
+
+#13
+kolizia atributov pri viacnas. dedic.:
+ - v pythone pomocou MRO - poradie podla ktoreho jazyk dohladava nazvy atributov/metod v hierarchii dedicnosti
+ - je mozne ho ovplyvnit zmenou poradia v hierarchii dedicnosti alebo redefinovanim metod v podtriedach
+
+#14
+syntax:
+ - sada pravidiel, ktora hovori o tom ako je mozne za seba radit jazykove konstrukcie
+ - PHP traits:
+	- premenna zacina $
+	- definicia funkcii zacina kluc. slovom 'function'
+	- podmienky/cykly maju syntax podobnu C
+	- podpora OOP - dedicnost, triedy, polymorfizmus
+	- dynamicke typovanie, existuju asotiativne (slovnik) aj indexove polia
+
+#15
+binarne scitanie:
+ - zahrnuje scitanie bitov a prenasanie do vyssich bitov v pripade ze sucet presiahne 1
+ - cele cisla, zlomky - je mozne prevadzat medzi ciselnymi sustavami
+ - kompexne cisla, ktore obsahuju imaginarnu a realnu zlozku nie je mozne prevadzat medzi c.s.
+
+#16
+faze procesu instanciacie:
+1) alokacia	- pre novu instanciu je alokovana potrebna pamat
+2) init		- volani inicializacnej metody pre nastavenie hodnot instancnych atributov a dalsich inicializacnych operacii
+
+#17
+garbage collector:
+ - spravanie programu, ktore v pripade ze na objekt uz v programe neexistuje odkaz, uvolni ho z pamate
+ - typicky pomocou
+	- mark & sweep - marking - detekcia dosiahnutelnosti, sweeping - samotne uvolnenie
+	- reference counting - objekt je uvolneny ak je pocet referencii rovny 0
+
+#18
+Union v C:
+ - struktura ktora uklada prvky do jedneho zdielaneho bloku pamate
+ - jej velkost zodpoveda velkosti najvacsieho clena 
+ - pri prepisovani sa prepisu vsetky prvky, pretoze sa pouziva ta ista pamat pre vsetky cleny
+ - vhodna pre systemu citlive na zdroje
+
+#19
+rozsah platnosti:
+ - cast programu, v ktorej sme schopny pracovat s premennou
+ - v pythone: pravidlo LEGB
+	- lokalny rozsah
+ 	- hladanie v ramcoch vyssich urovni zanorenia
+	- globalny ramec
+	- vstavane premenne
+
+
+#20
+semantika dedicnosti OOJ:
+ - ak trieda A dedi z triedy B, povieme ze A je nadtriedou B a B je podtriedou A
+ - vdaka dedicnosti je spolocne spravanie definovane iba raz v jednej nadtriede
+ - umozuje tiez podtriedam menit definicie zdedenych metod podla svojho vyznamu bez toho aby sme menili rodicovsku triedu
+ - vdaka dedicnosti dokazeme tvorit prehladny, znovupouzitelny a udrzovatelny kod
