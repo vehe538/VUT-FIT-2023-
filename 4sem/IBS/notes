@@ -1,0 +1,471 @@
+----
+Hashing + Crypto
+
+- CIA - Confidentiality, Integrity, Authenticity
+- authenticity - odosielatel je spravna osoba pre danu komunikaciu, symetricke sifrovanie
+- integrity    - v spravach nedoslo k zmene ich obsahu, podpis
+- confidetiality - obsah sprav poznaju iba ucasnici komunikacie, asymetricke sifrovanie
+
+- hash funkcie:
+	- algoritmus, ktory na vstup prijme hodnotu a pozadovanu dlzku a vytvori z neho unikatny sled znakov
+	- MD5 128bitov
+	- SHA1 - 160bitov
+	- SHA512 - 512b
+	- SHA256 - 256b
+	- BLAKE2- 512bitov alternativa k SHA512 a MD5 - bezpecnejsi s podobnou rychlostou
+
+- symetricke algoritmy:
+	- obe strany pouzivaju na zasifrovane a desifrovanie ten isty sukromny kluc
+	- relativne rychla a vypoctovo nenarocna
+	- napr.: AES - TLS/SSL, VPN, sifrovanie diskov
+		128, 192, 256 bitove kluce
+		ChaCha20 - TLS 1.3, OpenSSH, mobilne VPN
+- PKI:
+	- system, ktory popisuje generovanie, management, distribuciu digitalnych certifikatov
+	- komponenty PKI certifikatu:
+		- uzivatelov verejny kluc, jeho zamer, CA ktora validovala certifikat, doba platlnosti cert., algoritmus pouzity na podpis
+	- CSR - Certificate Signing Request - ziadost CA o certifikat
+	- CA - Certificate Authority - doverna institucia/entita, ktora poskytuje, riadi a odvolava certifikaty
+	     - verifikuje identitu uzivatelov a digitalne podpisuje ich certifikaty svojim private klucom
+	     - deli sa na Root CA (najvyssia uroven dovery v PKI) a Intermediate CA (most medzi root CA a uzivatelom, je autorizovana korenovou CA)
+
+HASH algos: Hashovanie - integrita
+    - MD5 - Message Digest
+    - 128bitova hodnota
+    - dnes nespolahlivy, kvoli najdenym slabinam
+
+    - SHA-1  Secure Hash Algorithm 1
+    - 160bitova hodnota
+    - nepouziva sa - boli najdene slabiny, bol nahradeny SHA-2
+
+    SHA-2
+
+        - SHA-256
+        - 256 bitova hodnota
+        - pouzitie: blokchain, SSL/TLS certs, password hashinng
+
+        - SHA-512
+        - 512 bitov
+        - high-security applications - digitalne certifikaty, podpisy, datova integrita
+
+    BLAKE2
+    - 256 / 512 bitov
+    - alternativa k md5 a sha2
+    - bezpecnejsi nez md5 s podobnou rychlostou
+
+    Whirlpool
+    - 512 bitov
+    - zalozeny na baze AES block cipher
+    - okrem podpisov je pouzity na bezpecny file storage
+
+    CRC32 - Cyclic Redundancy Cehck
+    - 32bitov
+    - NEkryptograficka funkcia pouzivana na error checking pri prenose data a ukladani
+
+Symmetric Key algos: Enkrypcia - ukrytie dat
+- celkovo rychlejsi - obe strany maju k dispozicii ten isty sukromny kluc
+- jeden kluc sa pouziva aj na zasifrovanie aj desifrovanie
+
+    - AES Advanced Ecryption Standard
+    - velmi rozsireny standard
+    - pouzitie: SSL/TLS, VPNs, disk encryption
+    - 128, 192, 256 bitove kluce
+
+    - DES Data Encryption Standard
+    - vyvinuty IBM niekedy 1970
+    - 56 bitov, dneska zranitelny
+
+    3DES - vylepseny DES
+    - pouziva v DES 3krat v kazdom data blocku
+    - pouzitie dvoch-troch 56 bitovych klucov
+    - legacy systems
+
+    Blowfish
+    - 64bitovy block, velkost kluca je variabilna v rozmedzi 32-448 bitov
+    - znamy svojou rychlostou - hashovanie hesiel a sifrovanie suborov
+
+    Twofish
+    - nastupca Blowfish, 128bitove bloky, velkosti kluca az 256 bitov
+
+    ChaCha20:
+    - moderny algoritus - vysoka bezpecnost aj rychlostou
+    - 256 bitove kluce
+    - pouzitie: TLS 1.3, OpenSSH, mobilna VPN
+
+    IDEA Iternational Data Encryption Algorithm
+    - patentovany algoritmus
+    - 64 a 128 bitove kluce
+
+    GOST
+    - rusky sifrovaci algortimus
+    - 256 bitove kluce
+
+Asymmetric-key algorithms - zasifrovanie + autenticita
+    RSA
+    - siroka pouzitie
+    - 1024 - 4096 bitove kluce
+    - pouzitie: digitalne podpisy, transport dat
+
+    Diffie-Hellman
+    - obe strany sa dohodnu na generatore g a prvocisle p
+    - vygeneruju public hodnotu pomocou private kluca: S = g^priv mod p a poslu druhej strane
+    - prijemca vypocita spolocny secret pomocou tej public hodnoty odosielatela finalny secret: s = S^priv mod p
+
+    ECC
+    - RSA s mensimi klucmi, podobna bezpecnost
+
+    DSA
+    - hlavne na digitalne podpisy
+
+    Ed25519
+    - vysoka vykonnost
+    - vysoka bezpecnost s 256 bitovymi klucmi
+    - digitalne podpisy, moderne protokoly ako OpenSSH a TLS
+
+Zhrnutie:
+
+Hash: 		SHA1, SHA2, BLAKE2, Whirlpool, ED5
+Symmetric: 	AES, DES, 3DES, ChaCha20, Blowfish, Twofish, IDEA, GOST
+Asymmetric: 	Diffie-Hellman, Ed25519, DSA, RSA, ECC
+
+-------
+DNS
+- port 53, primarne UDP, ak sprava presiahne 512b - TCP ako fallback
+- architektura:
+	- namespace DNS adries + mapovanie domen k IP adresam
+	- ulozisko DNS namespace-u
+	- pristup data a vyhladavanie
+
+- domenove mena su usporiadane v invertovanom vyhl. strome
+- zlozka s domenovymi menami je fyzicky ulozena na DNS serveri
+- kazdy DNS server managuje iba cast domenovych mien - zonu
+
+- DNS resolver:
+	- komunikacia typu Client->Server
+	- v mene uzivatela posiela query DNS serveru 
+
+- DNS resolution
+	- proces vyhladavania odpovede na zakl. DNS query
+	- Recursive Query:
+		- ak server nepozna odpoved, posle celu query inym serverom
+		- posiela ju klient resolveru	
+		- resolver musi najst spravnu hodnotu a az na konci vrati finalnu odpoved
+	- Iterative Query:
+		- ak server nepozna odpoved, vrati svoje najvhodnejsie odporucanie na iny server az kym sa nedostane k spravnej odpovedi
+		- resolver iteruje po odpovediach az nakoniec
+	- Reverse Query:
+		- na spetne vyhladanie IP k hostname pouzije in-addr.arpa domenu
+
+- typ DNS serverov: 1. primarne, 2. sekundarne, 3. Backup servery
+
+- TTL - time to live - ako dlho je DNS response nacachovana predtym, nez sa vytvori nova query pre server
+- typy zaznamov: A:    IPv4 --> hostname
+		AAAA:  IPv6 --> hostname 
+		CNAME: hostname --> hostname alias
+		MX:    mailserver pre danu domenu
+		NS:    autoritativne nameservery pre danu domenu
+		TXT:   Arbitrarny text
+		PTR:   hostname --> IP
+		SOA:   zonove metadata
+		SRV:   port + host pre rozne services
+
+- Format DNS recordu:
+	 _________________
+	|  Meno (var len) |  hostname.com
+	|_________________|
+	|   Typ (16bitov) |  A/PTR/SRV ...
+	|_________________|
+	| Trieda(16bitov) |  skoro vzdy IN - internet
+	|_________________|
+	| TTL (32 bitov)  | 32 bitovy integer, znaci TTL v sekundach
+	|_________________|
+	|RDLENGTH(16bitov)| 16 bitovu integer, znaci velkost RDATA 
+	|_________________|
+	| RDATA (var len) | payload/hodnota zaznamu, velkost zalezi na type a RDLENGTH 
+	|_________________|
+- DNS over TLS (DoT):
+	- port 853
+	- na posielanie DNS queries je pouzity nasifrovany TSL kanal
+	- sifrovana je IBA komunikacia medzi klientom a DNS resolverom
+
+- DNS over HTTPS (DoH):
+	- port 443
+	- komunikacia cez sifrovany HTTPS kanal
+
+-------
+Email
+
+- SMTP na posielanie, port 25 (587 na klient message submission)
+
+IMAP (port 143):
+	- mail zostava na servery a jednotlive foldre su syncnute medzi zariadeniami
+	- multidevice
+	- standard pre prijimanie posty
+
+POP3 (port 110):
+	- stahuje a odstranuje postu
+	- single-device
+	- ma len jeden folder - inbox
+	- zastarany
+
+Struktura spravy:
+	- Headers:
+		- polia: From, To, Subject, Date, Message-ID, Received, MIME-version, Content-Type
+	- Body:
+		- plain text alebo MIME sucast
+		- kazda sucast ma svoj Content-Type a Content-Transfer-Encoding
+
+- User1--MTA klient---internet---MTA server--User2
+
+- MIME - standard, ktory rozsiruje format email pre podporu okrem ASCII znakov
+	 aj multimedia (rozne prilohy)
+       - S/MIME:
+		- standard pre end-to-end sifrovanie
+		- odosielatel zasifruje email prijemcovym public klucom
+		- odosielatel prida k sprave podpis pomocou svojho private kluca
+		- prijemca desifruje spravy pomocou svojho private kluca
+		- prijemca verifikuje podpis pomocou odosielatelovho public kluca
+		
+		- pre doveryhodnot kluca je pouzita doveryhodna X.509 CA
+
+SPF:
+	- Sender protection framework
+	- zarucuje autenticitu odosielatela - prispieva k doveryhodnosti
+	- je DNS zaznam typu TXT, ktory obsahuje zoznam IP adries autorizovanych na odosielanie mailu z danej domeny
+
+- DKIM:
+	- standard pre zarucenie itegrity sprav a autenticity odosielatela digitalnym podpisom
+	- komunikacia NIE JE sifrovana
+	- podpis je pripnuty ako nove pole k headeru emailovej spravy
+
+- DMARC:
+	- komb. DKIM a SPF
+	- autenticita je overena vysledkami SPF a DKIM kontrol
+	- obsahuje moznost posielanie reportov vlastnikovi domeny v pripade jej zneuzitia 
+	
+- OpenPGP 
+	- standard pre digitalne podpisy, sifrovanie a key management
+	- poskytuje end-to-end encryption
+	- pre doveryhodnost kluca pouziva PGP Web of Trust model - kde uzivatelia si navzajom podpisu kluce
+	- GPG - GNU privacy guard je najrozsirenejsou implementaciou PGP
+----
+VPN:
+
+- tunneling - obalovanie packetov
+- passenger protocol - protokol spravy ktoru chcem odoslat
+- tunneling protocol - protokol, ktory na zaciatku prenosu obali orig. spravu a na konci rozbali do povodneho tvaru
+- carrier protokol - protokol/siet po ktorej (zaobaleny) packet putuje 
+- z hladiska TCP/IP stacku zalezi ake protokoly pre passengera a carriera podporuje tunneling protokol
+
+- moje pripojenie na VPN server sposobi prave to zaobalovanie packetov,
+  VPN ma zadefinovane sifrovanie pre svoje packety
+
+GRE:
+ - tunneling protokol na vrstve L3
+ - zaobaluje akekolvek L3 protokoly do IP packetu
+ - header obsahuje: 1. Flags; 2. ProtocolType (typ passengera)
+
+IPsec:
+ - framework co zaistuje vytvorenie bezpecneho tunelu
+ - pouziva prokoly:
+	- AH - Authentication Header
+		- poskytuje  autenticitu a ochranu proti znovupouziti vdaka HMAC
+		- nesifruje nic
+	- ESP - Encapsulating Security Payload
+		- poskytuje to co AH + dovernost
+		- zasifruje obsah spravy a prida HMAC
+
+ - AH a ESP maju 2 mody:
+	- Transport Mode:
+		- iba payload IP packetu je sifrovany a autentikovany
+		- end-to-end komunikacia
+
+	- Tunnel Mode:
+		- header aj payload IP packetu je zaobaleny a ochraneny
+		- VPNky a gateway-to-gateway komunikacia
+
+SPD - Security Policy Database
+ - subor pravidiel, ktory definuje zaobchadzanie s IP packetami, ktore putuju IPsec-enabled systemom - otazka: ci a ako zabezpecit packety
+ - kazde pravidlo priradzuje bud 'PROTECT with IPsec', 'BYPASS IPsec' alebo 'DISCARD'
+
+SAD - Security Associations Database
+ - tabulka aktualne aktivnych SA
+
+
+ - SA   - subor dohodnutych pravidiel ako zabezpecit komunikaciu
+	- otazka: pre aky typ komunikacie pouzijeme aku sifru, aky kluc a v ktorom smere komunikacie?
+	- A -> B (jedna SA),  potom B -> A (druha SA)
+	- pred IPsec packetom musi byt SA nastavena
+	- sucasti:
+		1. SPI - 32 bitove ID
+		2. typ sifry + session kluc -- toto ma nastarosti IKE (ISAKMP) - obe strany sa dohodnu na sifre a vymenia si kluce (ECDH)
+		3. cislo packetu - zabezpecenie proti opakovanemu odoslaniu
+		4. N sekund/bytov po ktorych je obnoveny kluc
+
+ISAKMP:
+ - framework, ktory definuje ako sa komunikanti dohodnu na SA
+
+IKE:
+ - implementacia ISAKMP
+ - stara sa o bezpecnu vymenu/rotaciu klucov pri IPsec komunikacii
+
+IPsec - vytvorenie tunela:
+- IKEv1:
+ - faza 1: autentikacia komunikantov, dohoda a crypto parametroch
+ - faza 2: dohoda na SA, cez kanal, ktory vznikol vo faze 1
+- IKEv2:
+ - dve vymeny: 1. IKE_SA_INIT (vymena klucov, dohoda na sifre) 2. IKE_AUTH (autentikacia)
+
+----
+L2 & L3 security:
+
+MAC address flooding:
+ - L2
+ - switche obsahuju CAM tabulku, ktora je zodpovedna obsahuje ako kluce mac adresy zariadeni a ako hodnota dany port
+ - ked pride frame na switch vytvori sa zaznam   mac_adresa--cislo_portu
+ - utocnik moze vytvorit vela falosnych mac adries a poslat z kazdej frame na switch
+ - CAM (content addressable memory) tabulka sa zaplni, co ma za nasledok ze switch sa sprava ako HUB -
+   - ked nema miesto v CAM tabulke, sprava odosle vsetkym zariadeniam (vratane utocnika) okrem odosielatela
+
+ - ochrana cez port security:
+ 	- nastavenie limitu kolko MAC adries moze byt naviazanych k jednemu portu
+	- typy operacii pri naruseni:
+		1. Protect: frame je zahodeny
+		2. Restrict: frame je zahodeny a incident je nahlaseny
+		3. Shutdown: rozhranie sa vypne a nastavi sa do 'err-disabled state'
+
+DHCP Spoofing:
+ - ked pride klient na siet, posle broadcastom vsetkym Discover spravu
+ - falosny DHCP server (normalne by to bol router) odpovie Offer spravou
+ - klient mu posle request, server vrati acknowledgement
+ - klient ma priradenu lokalnu adresu ale gateway je teraz utocnik (ktory presmeruvava komunikaciu na realny router)
+ - komunikacia tak prechadza klient--utocnik--router - sniffing
+
+ - pri modernych protokoloch je komunikacia sifrovana takze pohoda alebo je na mieste DHCP snooping
+
+DHCP snooping:
+ - ochrana proti dhcp spoofingu:
+	- server zahadzuje server-side spravy z nedoverihodnych adries
+	- tvori dynamicky binding table, kde pri kazdej pridelenej ip adrese vytvara zaznam s ip, mac, lease-time, port proti ktorej
+	  sa neskor kontroluju client-side spravy. Pri nezhode niektorej kombinacii poli je packet zahodeny
+
+ - ochrana proti starvation:
+	- rate limiting - nastavenie limitu client-side sprav za sekundu
+	- kontrola mac adresy v hlavicke ethernet packetu a hodnoty v poli CHADDR v dhcp packete
+
+ARP MiTM:
+ - utocnik posle fake ARP odpoved obeti -> do tabulky obete sa zapise ku gateway ip utocnikova mac adresa
+ - zaroven utocnik posle fake ARP odpoved routeru v mene obete -> v jeho tabulke sa zapise IP obete k mac utocnika
+ - takymto sposobom prebieha komunikacia cez utocnika bez znalosti obete
+
+
+DAI - Dynamic ARP Inspection:
+
+ - obranny mechanizmus - preveri kazdu ARP odpoved proti DHCP snooping tabulke - checkne nedoveryhodny port
+ - DAI tiez umoznuje limitovane ARP sprav - predvolene je nastavene 15 ARP sprav/s pre nedoveryhodne porty
+ - ak dojde k naruseniu - packet je zahodeny a incident sa zapise do logov
+
+
+DDoS:
+  Amplification utoky:
+	- maly request moze sposobit velku traffic 
+	- napr 40B DNS querry pre nejaky TXT zaznam moze pozadovat 100nasobne vacsiu odpoved
+	- utocnik ziada data za pouzitia IP adresy obete
+Reflection utoky:
+ 	- utocnik posle spravy serveru tretej strany v mene obete
+	- server potom posiela traffic obeti bez jej vedomia - DDoS
+
+---
+AAA - Authorization, Authentication, Accounting
+
+- autentikacia - overenie identity uzivatela
+- autorizacia - urcenie prav uzivatela a jeho pristupu k sluzbam
+- uctovnictvo - zaznamenavanie aktivity uzivatela
+
+RADIUS:
+ - protokol, ktory spaja autorizaciu a autentikaciu do jedneho procesu
+ - UDP port 1645/1812 pre autentikaciu; UDP port 1646/1813 pre autorizaciu
+ - pocas prenosu login creds, je schovane len heslo, ostatok packetu je v plaintexte
+
+802.1X:
+ - L2
+ - medzi clientom a zariadenim na ktore sa client chce pripojit
+ - bezpecnostny standard, podla ktoreho sa overuje identita uzivatela na porte
+ - umoznuje posielat uzivatelovi poziadavky na autentikaciu ( napr. prompt na meno a heslo )
+ - podla tohto standardu switch komunikuje s nejakym AAA serverom, ktory ma v sebe databazu s uziv. menami a heslami
+
+EAP: Extensible Authentication Protocol
+
+ - protokol, ktory sa v ramci 802.1X pouziva na prenos autentifikacnych udajov
+ - sposob akym komunikuje switch s RADIUS serverom
+ - je navrhuty tak, aby switch nemusel rozumiet obsahu EAP spravy - EAP moze obsahovat
+   rozne formy autentikacie, switch ho len zabali do RADIUS packetu a posle serveru
+
+
+SSH
+ - protokol, ktory vytvara bezpecny kanal na nezabezpecenej sieti, TCP port 22
+ - pouziva asymetricke sifrovanie a zaistuje CIA
+ - delenie:
+	- SSH Transport Layer Protocol - zasituje CIA serveru a volitelne kompresiu
+	- SSH User Authentication Protocol - overuje uzivatela (pozadovanie mena, hesla, klucov...)
+	- SSH Connection Protocol - umoznuje pouzivanie sluzieb na vzdialenom serveri cez ssh tunel
+ - na autentikaciu je mozne pouzit meno,heslo alebo kluce
+
+Remote Desktop:
+- windows ( unix alternativa rdesktop )
+- TCP port 3389
+- vektorova grafika - na clietovi sa da jednoducho rescalovat 
+
+VNC:
+- non-windows
+- TCP port 5900
+- rasterova grafika - plocha ktora bezi na serveri s fixnymi rozmermi sa rescalne na clienta
+ 
+ 
+
+---
+
+Autentikacne metody:
+- password	- odporucane silne hash funkcie
+- MFA		- na autentikaciu su pouzite aspon dva rozne sposoby overenia identity
+- Passkeys	- vyuzitie asym. kryptografie, phishing resistant
+- SSO		- jedno prihlasenie umoznuje pristup k viacerym aplikaciam bez potreby opakovane overovat identitu
+
+Autorizacne modely:
+ - DAC 	- Discretionary Access Control
+	- vlastnik zdrojov nastavi opravnenia inemu uzivatelovi
+
+ - MAC	- Mandatory Access Constrol
+ 	- administrator nastavuje uzivatelom a zdrojom klasifikacne urovne
+	- pristup je udeleny ak niekoho previerka zodpoveda/prevysuje uroven dokumentu
+
+ - RBAC	- Role Based Access Control
+	- su vytvorene role, ktore maju pridelene urcite opravnenia
+
+ - ABAC	- Attribute Based Access Control
+	- opravnenia sa okrem role viazu na viac atributov, napr. typ zdrojov, geog. poloha, pracovna doba
+
+JWT: JSON Web Tokens
+ - format tokenov, ktore obsahuju kryptograficky zabezpecene informacie
+ - pouzivaju sa na overenie identity vo webovych aplikaciach
+ - sucasti:
+	- header - typ tokenu, algoritmus pre podpisy
+	- payload - uzivatelske data, expiracia, poskytovatel,...
+	- podpis - stara sa o integritu a autenticitu
+
+
+LDAP:
+ - protokol sluziaci na vyhladavanie a spravu informacii v centralnom adresari pouzivatelov
+
+SAML:
+ - protokol zalozeny na XML, ktory realizuje SSO
+ - stara sa o bezpecny prenos autorizacnych a autentikacnych udajov medzi aplikaciami
+
+OAuth 2.0:
+ - zaistuje delegaciu pristupu medzi dvoma sluzbami
+ - komponenty:
+	- Autorizacny server
+	- Resource server
+	- Client
+	- Resource owner
+
